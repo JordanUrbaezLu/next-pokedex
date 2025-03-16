@@ -1,6 +1,6 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { PokemonData } from "@/types/PokemonData";
 import React from "react";
-import Image from "next/image";
 import pokemonTypes from "../data/pokemonTypes";
 
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
