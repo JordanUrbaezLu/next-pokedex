@@ -8,6 +8,14 @@ import { track } from '@vercel/analytics';
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const [loading, setLoading] = React.useState(true);
 
+  React.useEffect(() => {
+    const img = new Image();
+    img.src = pokemon?.img || '';
+    if (img.complete) {
+      setLoading(false);
+    }
+  }, [pokemon]);
+
   const name =
     pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   const id = '#' + pokemon?.id?.toString().padStart(4, '0');

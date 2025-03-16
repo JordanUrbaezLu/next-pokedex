@@ -4,7 +4,8 @@ Infinite Scroll
 Pre-Commit Hooks
 Setup Testing
 Setup Analytics with Vercel (Jordan)
-Favorite System
+Favorite System Local Storage (Jordan)
 Setup Build (Jordan)
 Break Up Generations Into Pages
 Eslint Setup (Jordan)
+InitialData Optimization (Jordan)
