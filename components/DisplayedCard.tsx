@@ -11,16 +11,42 @@ const DisplayedCard = ({
 }) => {
   const getBackgroundClass = (type1: string) => {
     switch (type1.toLowerCase()) {
-      case "water":
-        return "bg-gradient-to-b from-teal-300 to-teal-600";
-      case "poison":
-        return "bg-gradient-to-b from-purple-400 to-purple-700";
       case "normal":
         return "bg-gradient-to-b from-gray-300 to-gray-500";
+      case "fighting":
+        return "bg-gradient-to-b from-red-200 to-orange-500";
+      case "flying":
+        return "bg-gradient-to-b from-gray-300 to-gray-700";
+      case "poison":
+        return "bg-gradient-to-b from-purple-400 to-purple-700";
+      case "ground":
+        return "bg-gradient-to-b from-amber-800 to-yellow-400";
+      case "rock":
+        return "bg-gradient-to-b from-stone-500 to-stone-700";
+      case "bug":
+        return "bg-gradient-to-b from-lime-400 to-lime-600";
+      case "ghost":
+        return "bg-gradient-to-b from-indigo-400 to-indigo-700";
+      case "steel":
+        return "bg-gradient-to-b from-gray-500 to-gray-800";
       case "fire":
         return "bg-gradient-to-b from-orange-400 to-red-600";
+      case "water":
+        return "bg-gradient-to-b from-teal-300 to-teal-600";
       case "grass":
         return "bg-gradient-to-b from-green-300 to-green-600";
+      case "electric":
+        return "bg-gradient-to-b from-yellow-300 to-yellow-600";
+      case "psychic":
+        return "bg-gradient-to-b from-pink-400 to-pink-700";
+      case "ice":
+        return "bg-gradient-to-b from-cyan-200 to-cyan-400";
+      case "dragon":
+        return "bg-gradient-to-b from-blue-600 to-blue-900";
+      case "dark":
+        return "bg-gradient-to-b from-gray-700 to-black";
+      case "fairy":
+        return "bg-gradient-to-b from-rose-300 to-rose-500";
       default:
         return "bg-gradient-to-b from-gray-200 to-gray-400";
     }
@@ -38,7 +64,7 @@ const DisplayedCard = ({
         )} border-4 border-yellow-400 rounded-lg shadow-md p-2 z-200 overflow-hidden`}
       >
 
-        <img src="/close.svg" className="close" alt="" />
+        <img onClick={() => handleIsDisplayedCardOpen()} src="/close.svg" className="close" alt="" />
 
         <div className="card-name text-center font-bold mt-16 text-gray-800 text-sm">
           {displayedPokemon.name}

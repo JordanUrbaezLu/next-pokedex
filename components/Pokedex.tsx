@@ -46,12 +46,10 @@ const Pokedex = () => {
 
   const handleSetDisplayedPokemon = (pokemon: PokemonData) => {
     setDisplayedPokemon(pokemon);
-    console.log("pokemon", displayedPokemon);
   };
   
   const handleIsDisplayedCardOpen = () => {
-    setIsDisplayedCardOpen(true);
-    console.log("hello")
+    setIsDisplayedCardOpen(!isDisplayedCardOpen);
   }
 
   return (
