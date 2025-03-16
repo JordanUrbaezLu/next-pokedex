@@ -10,7 +10,7 @@ export default async function fetchPokemonDataParser(pokemonList: any[]) {
         type1: myPoke.types.at(0)?.type.name,
         type2: myPoke.types.at(1)?.type.name,
       };
-    })
+    }),
   );
   return newList;
 }

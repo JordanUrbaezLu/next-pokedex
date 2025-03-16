@@ -6,6 +6,7 @@ import pokemonGenerations from "@/data/pokemonGenerations";
 import fetchPokemonDataParser from "@/utils/fetchPokemonDataParser";
 import GenerationsContainer from "./GenerationsContainer";
 import DisplayedCard from "./DisplayedCard";
+import { PokemonData } from "@/types/PokemonData";
 
 const GLOBAL_LIMIT = 20;
 
@@ -15,6 +16,7 @@ const Pokedex = () => {
   const [currentIndex, setCurrentIndex] = React.useState(20);
   const [isDisplayedCardOpen, setIsDisplayedCardOpen] =
     React.useState<boolean>(false);
+  const [displayedPokemon, setDisplayedPokemon] = React.useState<PokemonData>(pokemonList[0]);
 
   React.useEffect(() => {
     const limit =
@@ -22,7 +24,7 @@ const Pokedex = () => {
         ? currentIndex - currentGen.end
         : GLOBAL_LIMIT;
     fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`
+      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`,
     )
       .then((res) => res.json())
       .then(async (data) => {
@@ -42,17 +44,31 @@ const Pokedex = () => {
   };
   console.log(currentIndex);
 
+  const handleSetDisplayedPokemon = (pokemon: PokemonData) => {
+    setDisplayedPokemon(pokemon);
+    console.log("pokemon", displayedPokemon);
+  };
+  
+  const handleIsDisplayedCardOpen = () => {
+    setIsDisplayedCardOpen(true);
+    console.log("hello")
+  }
+
   return (
     <>
       <GenerationsContainer
         handleSetGeneration={handleSetGeneration}
         currentGen={currentGen}
       />
-      <PokemonCardsContainer pokemonList={pokemonList} />
+      <PokemonCardsContainer
+        pokemonList={pokemonList}
+        handleSetDisplayedPokemon={handleSetDisplayedPokemon}
+        handleIsDisplayedCardOpen={handleIsDisplayedCardOpen}
+      />
       {currentIndex <= currentGen.end && (
         <button onClick={handleLoadMore}>Load More</button>
       )}
-      {isDisplayedCardOpen && <DisplayedCard />}
+      {isDisplayedCardOpen && <DisplayedCard displayedPokemon={displayedPokemon} handleIsDisplayedCardOpen={handleIsDisplayedCardOpen} />}
     </>
   );
 };
