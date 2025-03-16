@@ -1,17 +1,17 @@
-"use client";
+'use client';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import React from "react";
-import PokemonCardsContainer from "@/components/PokemonCardsContainer";
-import pokemonGenerations from "@/data/pokemonGenerations";
-import fetchPokemonDataParser from "@/utils/fetchPokemonDataParser";
-import GenerationsContainer from "./GenerationsContainer";
+import React from 'react';
+import PokemonCardsContainer from '@/components/PokemonCardsContainer';
+import pokemonGenerations from '@/data/pokemonGenerations';
+import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
+import GenerationsContainer from './GenerationsContainer';
 
 const GLOBAL_LIMIT = 20;
 
 const Pokedex = () => {
   const [pokemonList, setPokemonList] = React.useState<any[]>([]);
   const [currentGen, setCurrentGen] = React.useState(
-    pokemonGenerations[0],
+    pokemonGenerations[0]
   );
   const [currentIndex, setCurrentIndex] = React.useState(20);
 
@@ -21,7 +21,7 @@ const Pokedex = () => {
         ? currentIndex - currentGen.end
         : GLOBAL_LIMIT;
     fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`,
+      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`
     )
       .then((res) => res.json())
       .then(async (data) => {

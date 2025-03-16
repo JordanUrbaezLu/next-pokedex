@@ -1,8 +1,8 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import React from "react";
-import pokemonGenerations from "@/data/pokemonGenerations";
-import GenerationButton from "./GenerationButton";
-import { track } from "@vercel/analytics";
+import React from 'react';
+import pokemonGenerations from '@/data/pokemonGenerations';
+import GenerationButton from './GenerationButton';
+import { track } from '@vercel/analytics';
 
 const GenerationsContainer = ({
   handleSetGeneration,
