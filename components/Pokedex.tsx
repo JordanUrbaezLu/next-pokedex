@@ -8,26 +8,38 @@ import GenerationsContainer from './GenerationsContainer';
 
 const GLOBAL_LIMIT = 20;
 
-const Pokedex = () => {
-  const [pokemonList, setPokemonList] = React.useState<any[]>([]);
+const Pokedex = ({
+  initial20Pokemon,
+}: {
+  initial20Pokemon?: any[];
+}) => {
+  const [pokemonList, setPokemonList] = React.useState<any[]>(
+    initial20Pokemon ?? []
+  );
   const [currentGen, setCurrentGen] = React.useState(
     pokemonGenerations[0]
   );
   const [currentIndex, setCurrentIndex] = React.useState(20);
+  const [preventInitialRequest, setPreventInitialRequest] =
+    React.useState<boolean>(!!initial20Pokemon);
 
   React.useEffect(() => {
-    const limit =
-      currentIndex > currentGen.end
-        ? currentIndex - currentGen.end
-        : GLOBAL_LIMIT;
-    fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`
-    )
-      .then((res) => res.json())
-      .then(async (data) => {
-        const pokeList = await fetchPokemonDataParser(data.results);
-        setPokemonList((prev) => [...prev, ...pokeList]);
-      });
+    if (!preventInitialRequest) {
+      const limit =
+        currentIndex > currentGen.end
+          ? currentIndex - currentGen.end
+          : GLOBAL_LIMIT;
+      fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`
+      )
+        .then((res) => res.json())
+        .then(async (data) => {
+          const pokeList = await fetchPokemonDataParser(data.results);
+          setPokemonList((prev) => [...prev, ...pokeList]);
+        });
+    } else {
+      setPreventInitialRequest(!preventInitialRequest);
+    }
   }, [currentIndex, currentGen]);
 
   const handleLoadMore = () => {
