@@ -5,3 +5,4 @@ Pre-Commit Hooks
 Setup Testing
 Analytics
 Favorite System
+CI PR Template Check
