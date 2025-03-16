@@ -1,6 +1,6 @@
-import React from "react";
-import Pokedex from "@/components/Pokedex";
-import Title from "@/components/Title";
+import React from 'react';
+import Pokedex from '@/components/Pokedex';
+import Title from '@/components/Title';
 
 export default function Home() {
   return (

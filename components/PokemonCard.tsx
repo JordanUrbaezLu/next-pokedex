@@ -1,16 +1,16 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 /* eslint-disable  @next/next/no-img-element */
-import { PokemonData } from "@/types/PokemonData";
-import React from "react";
-import pokemonTypes from "../data/pokemonTypes";
-import { track } from "@vercel/analytics";
+import { PokemonData } from '@/types/PokemonData';
+import React from 'react';
+import pokemonTypes from '../data/pokemonTypes';
+import { track } from '@vercel/analytics';
 
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const [loading, setLoading] = React.useState(true);
 
   const name =
     pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-  const id = "#" + pokemon?.id?.toString().padStart(4, "0");
+  const id = '#' + pokemon?.id?.toString().padStart(4, '0');
 
   return (
     <div
@@ -19,12 +19,12 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
     >
       {loading && <p className="h-[168px]">Loading image...</p>}
       <img
-        src={pokemon?.img || ""}
+        src={pokemon?.img || ''}
         width={168}
         height={168}
         alt={`${name} image`}
         onLoad={() => setLoading(false)}
-        style={{ display: loading ? "none" : "block" }}
+        style={{ display: loading ? 'none' : 'block' }}
       />
       <div>{id}</div>
       <div className="flex gap-[10px] px-[5px]">

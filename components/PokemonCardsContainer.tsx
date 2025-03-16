@@ -1,6 +1,6 @@
-import { PokemonData } from "@/types/PokemonData";
-import React from "react";
-import PokemonCard from "./PokemonCard";
+import { PokemonData } from '@/types/PokemonData';
+import React from 'react';
+import PokemonCard from './PokemonCard';
 
 const PokemonCardsContainer = ({
   pokemonList,
