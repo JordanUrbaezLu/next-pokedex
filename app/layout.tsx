@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: "Next Pokedex",
@@ -11,16 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <link
-        precedence="default"
-        rel="stylesheet"
-        type="text/css"
-        href="https://fonts.googleapis.com/css?family=Poppins"
-      />
-      <html lang="en">
-        <body className="antialiased">{children}</body>
-      </html>
-    </>
+    <html lang="en" className={poppins.variable}>
+      <body className="antialiased">{children}</body>
+    </html>
   );
 }

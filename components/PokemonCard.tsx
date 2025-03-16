@@ -1,4 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable  @next/next/no-img-element */
 import { PokemonData } from "@/types/PokemonData";
 import React from "react";
 import pokemonTypes from "../data/pokemonTypes";
@@ -6,7 +7,8 @@ import pokemonTypes from "../data/pokemonTypes";
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const [loading, setLoading] = React.useState(true);
 
-  const name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  const name =
+    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   const id = "#" + pokemon?.id?.toString().padStart(4, "0");
 
   return (
