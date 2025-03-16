@@ -3,7 +3,8 @@ Filter Feature
 Infinite Scroll
 Pre-Commit Hooks
 Setup Testing
-Setup Analytics with Vercel
+Setup Analytics with Vercel (Jordan)
 Favorite System
 Setup Build (Jordan)
 Break Up Generations Into Pages
+Eslint Setup (Jordan)

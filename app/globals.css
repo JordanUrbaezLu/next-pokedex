@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Moderniz';
-  src: url('src/assets/Moderniz.otf') format('opentype')
+  font-family: "Moderniz";
+  src: url("src/assets/Moderniz.otf") format("opentype");
 }
 
 :root {
@@ -11,13 +11,13 @@
 }
 
 body {
-  background: url(src/assets/landscape.png)  ;
+  background: url(src/assets/landscape.png);
   color: var(--foreground);
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .title {
-  font-family: 'Moderniz', sans-serif;
+  font-family: "Moderniz", sans-serif;
   color: white;
   font-size: 48px;
 }
