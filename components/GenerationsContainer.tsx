@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from "react";
 import pokemonGenerations from "@/data/pokemonGenerations";
 import GenerationButton from "./GenerationButton";
