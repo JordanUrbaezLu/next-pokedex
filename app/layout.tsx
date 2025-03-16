@@ -11,13 +11,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <>
       <link
+        precedence="default"
         rel="stylesheet"
         type="text/css"
         href="https://fonts.googleapis.com/css?family=Poppins"
       />
-      <body className="antialiased">{children}</body>
-    </html>
+      <html lang="en">
+        <body className="antialiased">{children}</body>
+      </html>
+    </>
   );
 }
