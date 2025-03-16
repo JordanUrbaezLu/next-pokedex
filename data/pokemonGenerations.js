@@ -1,13 +1,6 @@
 const pokemonGenerations = [
   {
     url: "https://wallpaperaccess.com/full/24934.jpg",
-    name: "All Gens",
-    start: 0,
-    end: 898,
-    length: 151,
-  },
-  {
-    url: "https://wallpaperaccess.com/full/24934.jpg",
     name: "Gen I - Kanto Region",
     start: 0,
     end: 151,
