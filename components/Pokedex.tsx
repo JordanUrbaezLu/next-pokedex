@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from "react";
 import PokemonCardsContainer from "@/components/PokemonCardsContainer";
 import pokemonGenerations from "@/data/pokemonGenerations";
