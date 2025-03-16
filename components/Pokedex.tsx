@@ -5,6 +5,7 @@ import PokemonCardsContainer from '@/components/PokemonCardsContainer';
 import pokemonGenerations from '@/data/pokemonGenerations';
 import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
 import GenerationsContainer from './GenerationsContainer';
+import DisplayedCard from './DisplayedCard';
 
 const GLOBAL_LIMIT = 20;
 
@@ -22,6 +23,8 @@ const Pokedex = ({
   const [currentIndex, setCurrentIndex] = React.useState(20);
   const [preventInitialRequest, setPreventInitialRequest] =
     React.useState<boolean>(!!initial20Pokemon);
+  const [isDisplayedCardOpen, setIsDisplayedCardOpen] =
+    React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (!preventInitialRequest) {
@@ -66,6 +69,7 @@ const Pokedex = ({
       {currentIndex <= currentGen.end && (
         <button onClick={handleLoadMore}>Load More</button>
       )}
+      {isDisplayedCardOpen && <DisplayedCard />}
     </>
   );
 };
