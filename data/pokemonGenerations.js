@@ -52,8 +52,15 @@ const pokemonGenerations = [
     url: "https://3.bp.blogspot.com/-jnEY9x4teF0/XPxzBg-YxLI/AAAAAAAADtc/tLZ5gLhMup0fYH9HCaLtKc1_s5QpfNmuwCKgBGAs/w4096-h2304-c/grookey-scorbunny-sobble-pokemon-sword-and-shield-uhdpaper.com-4K-1.jpg",
     name: "Gen VIII - Galar Region",
     start: 809,
-    end: 898,
-    length: 89,
+    end: 905,
+    length: 96,
+  },
+  {
+    url: "https://3.bp.blogspot.com/-jnEY9x4teF0/XPxzBg-YxLI/AAAAAAAADtc/tLZ5gLhMup0fYH9HCaLtKc1_s5QpfNmuwCKgBGAs/w4096-h2304-c/grookey-scorbunny-sobble-pokemon-sword-and-shield-uhdpaper.com-4K-1.jpg",
+    name: "Gen IX - Paldea Region",
+    start: 905,
+    end: 1025,
+    length: 120,
   },
 ];
 
