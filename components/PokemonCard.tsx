@@ -3,6 +3,7 @@
 import { PokemonData } from "@/types/PokemonData";
 import React from "react";
 import pokemonTypes from "../data/pokemonTypes";
+import { track } from "@vercel/analytics";
 
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const [loading, setLoading] = React.useState(true);
@@ -12,7 +13,10 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const id = "#" + pokemon?.id?.toString().padStart(4, "0");
 
   return (
-    <div className="flex-col p-4 m-2 items-center justify-center w-[200px] rounded-md bg-gray-300 cursor-pointer hover:bg-gray-200 active:bg-gray-400">
+    <div
+      className="flex-col p-4 m-2 items-center justify-center w-[200px] rounded-md bg-gray-300 cursor-pointer hover:bg-gray-200 active:bg-gray-400"
+      onClick={() => track(name)}
+    >
       {loading && <p className="h-[168px]">Loading image...</p>}
       <img
         src={pokemon?.img || ""}

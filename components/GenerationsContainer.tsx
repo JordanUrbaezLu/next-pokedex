@@ -2,6 +2,7 @@
 import React from "react";
 import pokemonGenerations from "@/data/pokemonGenerations";
 import GenerationButton from "./GenerationButton";
+import { track } from "@vercel/analytics";
 
 const GenerationsContainer = ({
   handleSetGeneration,
@@ -17,7 +18,10 @@ const GenerationsContainer = ({
           <GenerationButton
             key={index}
             generation={generation}
-            handleClick={() => handleSetGeneration(generation)}
+            handleClick={() => {
+              track(generation.name);
+              handleSetGeneration(generation);
+            }}
             disabled={generation.name === currentGen.name}
           />
         );
