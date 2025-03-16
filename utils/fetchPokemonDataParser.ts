@@ -13,6 +13,7 @@ export default async function fetchPokemonDataParser(
         id: myPoke?.id,
         name: myPoke?.name,
         img: myPoke?.sprites?.other?.home?.front_default,
+        //img: myPoke?.sprites?.other?.showdown?.front_default, // gifs
         type1: myPoke.types.at(0)?.type.name,
         type2: myPoke.types.at(1)?.type.name,
       };
