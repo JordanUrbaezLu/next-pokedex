@@ -1,19 +1,20 @@
-import { PokemonRegions } from "@/types/PokemonRegions";
 import React from "react";
 
 const GenerationButton = ({
   generation,
   handleClick,
+  disabled,
 }: {
   generation: any;
   handleClick: any;
+  disabled: boolean;
 }) => {
   return (
     <div className="flex">
-      <img src={generation.url} width="100px" height="50px" />
       <button
         onClick={handleClick}
-        className="p-2 m-2 cursor-pointer bg-red-50 hover:bg-red-200 active:bg-red-400 text-black rounded-md"
+        className="p-2 m-2 rounded-md bg-gray-300 cursor-pointer hover:bg-gray-200 active:bg-gray-400"
+        disabled={disabled}
       >
         {generation.name}
       </button>

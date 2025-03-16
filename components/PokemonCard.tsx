@@ -23,7 +23,7 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
       <div>{id}</div>
       <div className="flex gap-[10px] px-[5px]">
         {pokemon?.type1 && (
-          <Image
+          <img
             src={pokemonTypes[pokemon.type1]}
             width={70}
             height={70}
@@ -31,7 +31,7 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
           />
         )}
         {pokemon?.type2 && (
-          <Image
+          <img
             src={pokemonTypes[pokemon.type2]}
             width={70}
             height={70}
