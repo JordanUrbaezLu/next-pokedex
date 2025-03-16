@@ -22,7 +22,7 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
 
   return (
     <div
-      className="flex-col p-4 m-2 items-center justify-center w-[200px] rounded-md bg-gray-300 cursor-pointer hover:bg-gray-200 active:bg-gray-400"
+      className="flex-col p-4 m-2 items-center justify-center w-[200px] max-h-[265px] rounded-md bg-gray-300 cursor-pointer hover:bg-gray-200 active:bg-gray-400"
       onClick={() => track(name)}
     >
       {loading && <p className="h-[168px]">Loading image...</p>}

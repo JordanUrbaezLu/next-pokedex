@@ -35,7 +35,12 @@ const Pokedex = ({
         .then((res) => res.json())
         .then(async (data) => {
           const pokeList = await fetchPokemonDataParser(data.results);
-          setPokemonList((prev) => [...prev, ...pokeList]);
+          if (currentGen.start === currentIndex - GLOBAL_LIMIT) {
+            // generation swap
+            setPokemonList(pokeList);
+          } else {
+            setPokemonList((prev) => [...prev, ...pokeList]);
+          }
         });
     } else {
       setPreventInitialRequest(!preventInitialRequest);
@@ -47,8 +52,7 @@ const Pokedex = ({
   };
 
   const handleSetGeneration = (generation: any) => {
-    setPokemonList([]);
-    setCurrentIndex(generation.start + 20);
+    setCurrentIndex(generation.start + GLOBAL_LIMIT);
     setCurrentGen(generation);
   };
 
