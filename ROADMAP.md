@@ -9,3 +9,4 @@ Setup Build (Jordan)
 Break Up Generations Into Pages
 Eslint Setup (Jordan)
 InitialData Optimization (Jordan)
+Fix Flash Re-Render (Jordan)
