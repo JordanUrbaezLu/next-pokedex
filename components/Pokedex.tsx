@@ -5,6 +5,7 @@ import PokemonCardsContainer from '@/components/PokemonCardsContainer';
 import pokemonGenerations from '@/data/pokemonGenerations';
 import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
 import GenerationsContainer from './GenerationsContainer';
+import LoadMoreButton from './LoadMoreButton';
 
 const GLOBAL_LIMIT = 20;
 
@@ -49,6 +50,12 @@ const Pokedex = ({
 
   const handleLoadMore = () => {
     setCurrentIndex((prev) => prev + GLOBAL_LIMIT);
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth',
+      });
+    }, 50);
   };
 
   const handleSetGeneration = (generation: any) => {
@@ -63,9 +70,10 @@ const Pokedex = ({
         currentGen={currentGen}
       />
       <PokemonCardsContainer pokemonList={pokemonList} />
-      {currentIndex <= currentGen.end && (
-        <button onClick={handleLoadMore}>Load More</button>
-      )}
+      <LoadMoreButton
+        disabled={currentIndex > currentGen.end}
+        handleLoadMore={handleLoadMore}
+      />
     </>
   );
 };
