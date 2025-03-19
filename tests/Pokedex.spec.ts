@@ -12,4 +12,12 @@ test.describe('Next Pokédex', () => {
       await expect(pokemonGen).toBeVisible();
     }
   });
+
+  test('Load more should show ', async ({ page }) => {
+    const loadMoreBtn = page.getByText('Load More');
+    loadMoreBtn.click();
+    await page.waitForTimeout(5000);
+    const pikachu = page.getByText('Pikachu');
+    await expect(pikachu).toBeVisible();
+  });
 });

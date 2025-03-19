@@ -46,7 +46,7 @@ const Pokedex = ({
     } else {
       setPreventInitialRequest(!preventInitialRequest);
     }
-  }, [currentIndex, currentGen]);
+  }, [currentIndex, currentGen, preventInitialRequest]);
 
   const handleLoadMore = () => {
     setCurrentIndex((prev) => prev + GLOBAL_LIMIT);
@@ -55,7 +55,7 @@ const Pokedex = ({
         top: document.body.scrollHeight,
         behavior: 'smooth',
       });
-    }, 50);
+    }, 500);
   };
 
   const handleSetGeneration = (generation: any) => {
