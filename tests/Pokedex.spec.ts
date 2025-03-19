@@ -13,11 +13,25 @@ test.describe('Next Pokédex', () => {
     }
   });
 
-  test('Load more should show ', async ({ page }) => {
+  test('Load more should show Pikachu', async ({ page }) => {
     const loadMoreBtn = page.getByText('Load More');
     loadMoreBtn.click();
     await page.waitForTimeout(5000);
     const pikachu = page.getByText('Pikachu');
     await expect(pikachu).toBeVisible();
+  });
+
+  test('Pokedex should not exceed last pokemon in current generation', async ({
+    page,
+  }) => {
+    for (let i = 0; i < 7; i++) {
+      const loadMoreBtn = page.getByText('Load More');
+      loadMoreBtn.click();
+      await page.waitForTimeout(1000);
+    }
+    const loadMoreBtn = page.getByText('Load More');
+    expect(loadMoreBtn).toBeDisabled();
+    const Mewtwo = page.getByText('Mewtwo');
+    await expect(Mewtwo).toBeVisible();
   });
 });
