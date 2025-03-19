@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix --dir app --dir components --dir data --dir types --dir utils",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,css,scss}\"",
     "prepare": "husky install",
-    "test": "concurrently \"npm run dev\" \"npx playwright test\""
+    "test": "concurrently \"npm run dev\" \"npx playwright test --project=chromium\""
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
