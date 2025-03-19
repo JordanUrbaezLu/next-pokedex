@@ -9,7 +9,8 @@
     "lint": "next lint --dir app --dir components --dir data --dir types --dir utils",
     "lint:fix": "next lint --fix --dir app --dir components --dir data --dir types --dir utils",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,css,scss}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "concurrently \"npm run dev\" \"npx playwright test\""
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
@@ -27,10 +28,12 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.2",
     "eslint-config-prettier": "^10.1.1",

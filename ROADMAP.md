@@ -1,7 +1,7 @@
 Displayed Card Feature (Eleana)
 Filter Feature
 Infinite Scroll
-Pre-Commit Hooks
+Pre-Commit Hooks (Jordan)
 Setup Testing
 Setup Analytics with Vercel (Jordan)
 Favorite System Local Storage (Jordan)
