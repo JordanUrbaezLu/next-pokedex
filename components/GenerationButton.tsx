@@ -14,7 +14,7 @@ const GenerationButton = ({
     <div className="flex">
       <button
         onClick={handleClick}
-        className="p-2 m-2 rounded-md border-3 border-sky-500 bg-gray-300 cursor-pointer bg-sky-200 cursor-pointer hover:bg-sky-300 active:bg-sky-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-sm font-bold"
+        className="p-2 m-2 rounded-md border-3 border-sky-500 bg-gray-300 cursor-pointer bg-sky-200 cursor-pointer hover:bg-sky-300 active:bg-sky-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-sm font-bold hover:scale-105 hover:-translate-y-1"
         disabled={disabled}
       >
         {generation.name}
