@@ -10,8 +10,10 @@ export default async function fetchPokemonDataParser(
       );
       console.log(myPoke);
       return {
-        id: myPoke?.id,
-        name: myPoke?.name,
+        id: '#' + myPoke?.id?.toString().padStart(4, '0'),
+        name:
+          myPoke?.name.charAt(0).toUpperCase() +
+          myPoke?.name.slice(1),
         img: myPoke?.sprites?.other?.home?.front_default,
         //img: myPoke?.sprites?.other?.showdown?.front_default, // gifs
         type1: myPoke.types.at(0)?.type.name,
