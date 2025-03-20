@@ -5,16 +5,16 @@ import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
 
 export default async function Home() {
   const res = await fetch(
-    'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0',
+    'https://pokeapi.co/api/v2/pokemon?limit=40&offset=0',
     { cache: 'no-store' }
   ).then((response) => response.json());
 
-  const initial20Pokemon = await fetchPokemonDataParser(res.results);
+  const initialPokemon = await fetchPokemonDataParser(res.results);
 
   return (
     <div className="p-6">
       <Title />
-      <Pokedex initial20Pokemon={initial20Pokemon} />
+      <Pokedex initialPokemon={initialPokemon} />
     </div>
   );
 }
