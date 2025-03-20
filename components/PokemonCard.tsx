@@ -9,6 +9,7 @@ import RingLoader from 'react-spinners/RingLoader';
 const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
   const [loading, setLoading] = React.useState(true);
 
+  // wait for image to be completely loaded before you remove loader
   React.useEffect(() => {
     const img = new Image();
     img.src = pokemon?.img || '';
@@ -17,14 +18,10 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
     }
   }, [pokemon]);
 
-  const name =
-    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-  const id = '#' + pokemon?.id?.toString().padStart(4, '0');
-
   return (
     <div
       className="flex-col p-4 m-2 items-center justify-center w-[200px] max-h-[265px] rounded-md border-3 border-sky-500 bg-sky-200 cursor-pointer hover:bg-sky-300 active:bg-sky-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-sm font-bold pokemon-font"
-      onClick={() => track(name)}
+      onClick={() => track(pokemon.name)}
     >
       {loading && (
         <div className="p-[20px]">
@@ -42,11 +39,11 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
         src={pokemon?.img || ''}
         width={168}
         height={168}
-        alt={`${name} image`}
+        alt={`${pokemon.name} image`}
         onLoad={() => setLoading(false)}
         style={{ display: loading ? 'none' : 'block' }}
       />
-      <div>{id}</div>
+      <div>{pokemon.id}</div>
       <div className="flex gap-[10px] px-[5px]">
         {pokemon?.type1 && (
           <img
@@ -67,7 +64,7 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
           />
         )}
       </div>
-      <div className="text-center">{name}</div>
+      <div className="text-center">{pokemon.name}</div>
     </div>
   );
 };
