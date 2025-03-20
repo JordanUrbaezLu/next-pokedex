@@ -27,10 +27,12 @@ test.describe('Next Pokédex', () => {
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
       loadMoreBtn.click();
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(300);
     }
-    const loadMoreBtn = page.getByText('Load More');
-    expect(loadMoreBtn).toBeDisabled();
+
+    const scrollUpBtn = page.getByText('Scroll Up');
+    await expect(scrollUpBtn).toBeVisible();
+
     const Mewtwo = page.getByText('Mewtwo');
     await expect(Mewtwo).toBeVisible();
   });

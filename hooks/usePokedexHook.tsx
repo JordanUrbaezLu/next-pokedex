@@ -65,7 +65,7 @@ const usePokedexHook = ({
     }
   }, [pokemonList]);
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (scrollUp?: boolean) => {
     setCurrentIndex((prev) => {
       if (prev + GLOBAL_LIMIT < currentGen.end) {
         return prev + GLOBAL_LIMIT;
@@ -75,7 +75,7 @@ const usePokedexHook = ({
     });
     setTimeout(() => {
       window.scrollTo({
-        top: document.body.scrollHeight,
+        top: scrollUp ? 0 : document.body.scrollHeight,
         behavior: 'smooth',
       });
     }, 75);
