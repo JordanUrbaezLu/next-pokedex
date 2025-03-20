@@ -26,12 +26,8 @@ const Pokedex = ({
 
   React.useEffect(() => {
     if (!preventInitialRequest) {
-      const limit =
-        currentIndex > currentGen.end
-          ? currentIndex - currentGen.end
-          : GLOBAL_LIMIT;
       fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentIndex - GLOBAL_LIMIT}`
+        `https://pokeapi.co/api/v2/pokemon?limit=${GLOBAL_LIMIT}&offset=${currentIndex - GLOBAL_LIMIT}`
       )
         .then((res) => res.json())
         .then(async (data) => {
@@ -49,7 +45,13 @@ const Pokedex = ({
   }, [currentIndex, currentGen, preventInitialRequest]);
 
   const handleLoadMore = () => {
-    setCurrentIndex((prev) => prev + GLOBAL_LIMIT);
+    setCurrentIndex((prev) => {
+      if (prev + GLOBAL_LIMIT < currentGen.end) {
+        return prev + GLOBAL_LIMIT;
+      } else {
+        return currentGen.end;
+      }
+    });
     setTimeout(() => {
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -71,7 +73,7 @@ const Pokedex = ({
       />
       <PokemonCardsContainer pokemonList={pokemonList} />
       <LoadMoreButton
-        disabled={currentIndex > currentGen.end}
+        disabled={currentIndex >= currentGen.end}
         handleLoadMore={handleLoadMore}
       />
     </>
