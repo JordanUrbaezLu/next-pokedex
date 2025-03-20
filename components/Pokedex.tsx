@@ -23,7 +23,7 @@ const Pokedex = ({ initialPokemon }: { initialPokemon?: any[] }) => {
       />
       <PokemonCardsContainer pokemonList={pokemonList} />
       <LoadMoreButton
-        disabled={currentIndex >= currentGen.end}
+        scrollUp={currentIndex >= currentGen.end}
         handleLoadMore={handleLoadMore}
       />
     </>
