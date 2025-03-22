@@ -17,10 +17,7 @@ const Pokedex = ({ initialPokemon }: { initialPokemon?: any[] }) => {
 
   return (
     <>
-      <GenerationsContainer
-        handleSetGeneration={handleSetGeneration}
-        currentGen={currentGen}
-      />
+      <GenerationsContainer />
       <PokemonCardsContainer pokemonList={pokemonList} />
       <LoadMoreButton
         scrollUp={currentIndex >= currentGen.end}
