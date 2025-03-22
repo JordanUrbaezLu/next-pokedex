@@ -1,6 +1,5 @@
 import React from 'react';
 import Pokedex from '@/components/Pokedex';
-import Title from '@/components/Title';
 import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
 
 export default async function Home() {
@@ -13,7 +12,6 @@ export default async function Home() {
 
   return (
     <div className="p-6">
-      <Title />
       <Pokedex initialPokemon={initialPokemon} />
     </div>
   );
