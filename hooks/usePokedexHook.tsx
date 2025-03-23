@@ -5,23 +5,15 @@ import React from 'react';
 
 const GLOBAL_LIMIT = 20;
 
-const usePokedexHook = ({
-  initialPokemon,
-}: {
-  initialPokemon?: any[];
-}) => {
-  const [pokemonList, setPokemonList] = React.useState<any[]>(
-    initialPokemon?.slice(0, 20) ?? []
+const usePokedexHook = ({ generation }: { generation?: any }) => {
+  const [pokemonList, setPokemonList] = React.useState<any[]>([]);
+  const [next20, setNext20] = React.useState<any[]>([]);
+  const [currentGen, setCurrentGen] = React.useState(generation);
+  const [currentIndex, setCurrentIndex] = React.useState(
+    generation.start + 20
   );
-  const [next20, setNext20] = React.useState<any[]>(
-    initialPokemon?.slice(21, 40) ?? []
-  );
-  const [currentGen, setCurrentGen] = React.useState(
-    pokemonGenerations[0]
-  );
-  const [currentIndex, setCurrentIndex] = React.useState(20);
   const [preventInitialRequest, setPreventInitialRequest] =
-    React.useState<boolean>(!!initialPokemon);
+    React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (!preventInitialRequest) {
@@ -66,7 +58,7 @@ const usePokedexHook = ({
   }, [pokemonList]);
 
   const handleLoadMore = (scrollUp?: boolean) => {
-    setCurrentIndex((prev) => {
+    setCurrentIndex((prev: any) => {
       if (prev + GLOBAL_LIMIT < currentGen.end) {
         return prev + GLOBAL_LIMIT;
       } else {
