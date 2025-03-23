@@ -1,5 +1,12 @@
+'use client';
+import PokemonCardsContainer from '@/components/PokemonCardsContainer';
+import usePokedexHook from '@/hooks/usePokedexHook';
+import React from 'react';
+
 const Generation = () => {
-  return <div>Kalos</div>;
+  const { pokemonList } = usePokedexHook({});
+
+  return <PokemonCardsContainer pokemonList={pokemonList} />;
 };
 
 export default Generation;
