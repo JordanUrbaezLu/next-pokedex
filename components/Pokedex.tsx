@@ -1,30 +1,9 @@
 'use client';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from 'react';
-import PokemonCardsContainer from '@/components/PokemonCardsContainer';
-import GenerationsContainer from './GenerationsContainer';
-import LoadMoreButton from './LoadMoreButton';
-import usePokedexHook from '@/hooks/usePokedexHook';
 
-const Pokedex = ({ initialPokemon }: { initialPokemon?: any[] }) => {
-  const {
-    pokemonList,
-    currentGen,
-    currentIndex,
-    handleLoadMore,
-    handleSetGeneration,
-  } = usePokedexHook({ initialPokemon });
-
-  return (
-    <>
-      <GenerationsContainer />
-      <PokemonCardsContainer pokemonList={pokemonList} />
-      <LoadMoreButton
-        scrollUp={currentIndex >= currentGen.end}
-        handleLoadMore={handleLoadMore}
-      />
-    </>
-  );
+const Pokedex = () => {
+  return <div>Welcome to the Next Pokédex Home Page</div>;
 };
 
 export default Pokedex;
