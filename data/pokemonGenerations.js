@@ -5,7 +5,7 @@ const pokemonGenerations = [
     start: 0,
     end: 151,
     length: 151,
-    href: '/region/gen-I',
+    href: '/generation/1',
   },
   {
     url: 'https://wallpaperaccess.com/full/5258766.jpg',
@@ -13,7 +13,7 @@ const pokemonGenerations = [
     start: 151,
     end: 251,
     length: 100,
-    href: '/region/gen-II',
+    href: '/generation/2',
   },
   {
     url: 'https://wallpaperaccess.com/full/159250.jpg',
@@ -21,7 +21,7 @@ const pokemonGenerations = [
     start: 251,
     end: 386,
     length: 135,
-    href: '/region/gen-III',
+    href: '/generation/3',
   },
   {
     url: 'https://wallpaperaccess.com/full/146817.jpg',
@@ -29,7 +29,7 @@ const pokemonGenerations = [
     start: 386,
     end: 493,
     length: 107,
-    href: '/region/gen-IV',
+    href: '/generation/4',
   },
   {
     url: 'https://wallpapercave.com/wp/wp7582565.jpg',
@@ -37,7 +37,7 @@ const pokemonGenerations = [
     start: 493,
     end: 649,
     length: 156,
-    href: '/region/gen-V',
+    href: '/generation/5',
   },
   {
     url: 'https://wallpapercave.com/wp/wp8864156.jpg',
@@ -45,7 +45,7 @@ const pokemonGenerations = [
     start: 649,
     end: 721,
     length: 72,
-    href: '/region/gen-VI',
+    href: '/generation/6',
   },
   {
     url: 'https://wallpaperaccess.com/full/1919633.jpg',
@@ -53,7 +53,7 @@ const pokemonGenerations = [
     start: 721,
     end: 809,
     length: 88,
-    href: '/region/gen-VII',
+    href: '/generation/7',
   },
   {
     url: 'https://3.bp.blogspot.com/-jnEY9x4teF0/XPxzBg-YxLI/AAAAAAAADtc/tLZ5gLhMup0fYH9HCaLtKc1_s5QpfNmuwCKgBGAs/w4096-h2304-c/grookey-scorbunny-sobble-pokemon-sword-and-shield-uhdpaper.com-4K-1.jpg',
@@ -61,7 +61,7 @@ const pokemonGenerations = [
     start: 809,
     end: 905,
     length: 96,
-    href: '/region/gen-VIII',
+    href: '/generation/8',
   },
   {
     url: 'https://3.bp.blogspot.com/-jnEY9x4teF0/XPxzBg-YxLI/AAAAAAAADtc/tLZ5gLhMup0fYH9HCaLtKc1_s5QpfNmuwCKgBGAs/w4096-h2304-c/grookey-scorbunny-sobble-pokemon-sword-and-shield-uhdpaper.com-4K-1.jpg',
@@ -69,7 +69,7 @@ const pokemonGenerations = [
     start: 905,
     end: 1025,
     length: 120,
-    href: '/region/gen-IX',
+    href: '/generation/9',
   },
 ];
 

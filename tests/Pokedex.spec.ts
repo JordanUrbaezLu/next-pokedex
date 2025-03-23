@@ -23,7 +23,7 @@ test.describe('Next Pokédex', () => {
   test('Pokedex should not exceed last pokemon in current generation', async ({
     page,
   }) => {
-    await page.goto('/region/gen-I');
+    await page.goto('/generation/1');
 
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
@@ -36,5 +36,16 @@ test.describe('Next Pokédex', () => {
 
     const Mewtwo = page.getByText('Mewtwo');
     await expect(Mewtwo).toBeVisible();
+  });
+
+  test('Page should show Error Page on invalid url', async ({
+    page,
+  }) => {
+    await page.goto('/generation/99');
+
+    const error = page.getByText(
+      'Whoops! Looks like theres been some error.'
+    );
+    await expect(error).toBeVisible();
   });
 });
