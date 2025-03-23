@@ -6,13 +6,13 @@ import usePokedexHook from '@/hooks/usePokedexHook';
 import React from 'react';
 import pokemonGenerations from '@/data/pokemonGenerations';
 import isValidParams from '@/utils/isValidParam';
-import ErrorPage from '@/components/ErrorPage';
+import { notFound } from 'next/navigation';
 
 const Generation = ({ params }: { params: any }) => {
   const param = React.use(params) as any;
   const validParams = isValidParams(param);
   if (!validParams) {
-    return <ErrorPage />;
+    notFound();
   }
 
   const { pokemonList, handleLoadMore, currentIndex, currentGen } =
