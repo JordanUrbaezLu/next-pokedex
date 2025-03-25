@@ -27,3 +27,18 @@ body {
 .pokemon-font {
   font-family: 'Pokemon', sans-serif;
 }
+@media (max-width: 768px) {
+  .title {
+    font-size: 34px;
+    text-align: center;
+  }
+
+  .pokemon-font {
+    font-size: 12px;
+  }
+
+  body {
+    background-position: center;
+    background-size: cover;
+  }
+}
