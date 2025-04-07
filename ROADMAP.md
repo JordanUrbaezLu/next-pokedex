@@ -12,6 +12,7 @@ Styling Card (AJ)
 Mobile Design (AJ)
 Scroll Up Button at End of List (Jordan)
 Break Up Generations Into Pages (Jordan)
+GQL Yoga (Jordan)
 
 TODO
 Create new page for filter support that makes request for all pokemon? Then allows filter (Find my pokemon)
