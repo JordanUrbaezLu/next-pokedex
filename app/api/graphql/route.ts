@@ -42,8 +42,14 @@ const yoga = createYoga<{
     },
   }),
   graphqlEndpoint: '/api/graphql',
-  fetchAPI: { Response },
+  fetchAPI: { Request, Response }, // Needed for Next.js compatibility
   graphiql: process.env.NODE_ENV !== 'production',
 });
 
-export { yoga as GET, yoga as POST, yoga as OPTIONS };
+export async function GET(request: NextRequest) {
+  return yoga.handleRequest(request, { req: request });
+}
+
+export async function POST(request: NextRequest) {
+  return yoga.handleRequest(request, { req: request });
+}
