@@ -4,6 +4,7 @@ import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import GenerationsContainer from '@/components/GenerationsContainer';
 import Title from '@/components/Title';
+import Providers from '@/components/Providers';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <body className="antialiased">
-        <Title />
-        <GenerationsContainer />
-        {children}
+        <Providers>
+          <Title />
+          <GenerationsContainer />
+          {children}
+        </Providers>
       </body>
       <Analytics />
     </html>
