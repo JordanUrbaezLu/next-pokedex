@@ -48,4 +48,16 @@ test.describe('Next Pokédex', () => {
     );
     await expect(error).toBeVisible();
   });
+
+  test('Page should show Backend Page correctly', async ({
+    page,
+  }) => {
+    test.setTimeout(120000);
+    await page.goto('/backend');
+    await page.waitForTimeout(60000);
+    const error = page.getByText(
+      '{ "message": "Hello from the backend!", "status": "success" }'
+    );
+    await expect(error).toBeVisible();
+  });
 });
