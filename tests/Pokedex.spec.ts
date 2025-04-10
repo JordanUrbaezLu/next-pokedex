@@ -29,17 +29,21 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('/generation/1');
-
-    while (
-      await page
-        .getByRole('button', { name: 'Load More' })
-        .isVisible()
-        .catch(() => false)
-    ) {
-      await page.getByRole('button', { name: 'Load More' }).click();
-      await page.waitForTimeout(300);
+    while (true) {
+      const mewtwoLocator = page.getByText('Mewtwo', { exact: true });
+      if (await mewtwoLocator.isVisible().catch(() => false)) {
+        break;
+      }
+      const loadMore = page.getByRole('button', {
+        name: 'Load More',
+      });
+      if (await loadMore.isVisible().catch(() => false)) {
+        await loadMore.click();
+        await page.waitForTimeout(300);
+      } else {
+        break;
+      }
     }
-
     const mewtwo = page.getByText('Mewtwo', { exact: true });
     await expect(mewtwo).toBeVisible();
   });
