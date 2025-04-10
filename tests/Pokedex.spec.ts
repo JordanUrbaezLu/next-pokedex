@@ -6,13 +6,18 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Next Pokédex', () => {
-  test('Should show all generation buttons', async ({ page }) => {
+  test('Next Pokédex - Should show all generation buttons', async ({
+    page,
+  }) => {
+    await page.goto('/');
     for (const gen of pokemonGenerations) {
-      const pokemonGen = page.getByText(gen.name);
-      await expect(pokemonGen).toBeVisible();
+      const generationLink = page.getByRole('link', {
+        name: gen.name,
+      });
+      await expect(generationLink).toBeVisible();
+      await expect(generationLink).toHaveAttribute('href', gen.href);
     }
   });
-
   test('Should show home page correctly', async ({ page }) => {
     const title = page.getByText(
       'Welcome to the Next Pokédex Home Page'
@@ -27,7 +32,7 @@ test.describe('Next Pokédex', () => {
 
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
-      loadMoreBtn.click();
+      await loadMoreBtn.click();
       await page.waitForTimeout(300);
     }
 
