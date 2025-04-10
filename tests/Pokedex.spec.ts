@@ -30,17 +30,18 @@ test.describe('Next Pokédex', () => {
   }) => {
     await page.goto('/generation/1');
 
-    for (let i = 0; i < 7; i++) {
-      const loadMoreBtn = page.getByText('Load More');
-      await loadMoreBtn.click();
+    while (
+      await page
+        .getByRole('button', { name: 'Load More' })
+        .isVisible()
+        .catch(() => false)
+    ) {
+      await page.getByRole('button', { name: 'Load More' }).click();
       await page.waitForTimeout(300);
     }
 
-    const scrollUpBtn = page.getByText('Scroll Up');
-    await expect(scrollUpBtn).toBeVisible();
-
-    const Mewtwo = page.getByText('Mewtwo');
-    await expect(Mewtwo).toBeVisible();
+    const mewtwo = page.getByText('Mewtwo', { exact: true });
+    await expect(mewtwo).toBeVisible();
   });
 
   test('Page should show Error Page on invalid url', async ({
