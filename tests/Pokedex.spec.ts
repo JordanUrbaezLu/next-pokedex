@@ -75,7 +75,7 @@ test.describe('Next Pokédex', () => {
     const dropdown = page.locator(
       'select[data-testid="generation-select"]'
     );
-    await dropdown.selectOption({ label: 'Gen II - Johto' });
-    await expect(dropdown).toHaveValue('gen2');
+    await dropdown.selectOption({ label: 'Gen II - Johto Region' });
+    await expect(dropdown).toHaveValue('/generation/2');
   });
 });
