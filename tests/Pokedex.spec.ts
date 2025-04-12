@@ -71,6 +71,7 @@ test.describe('Next Pokédex', () => {
     await expect(error).toBeVisible();
   });
   test('should select a generation', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 }); // Show mobile-only UI
     await page.goto('http://localhost:3000');
     await page.getByRole('button', { name: /pokemon/i }).click();
     const dropdown = page.locator(
