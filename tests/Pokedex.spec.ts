@@ -70,4 +70,10 @@ test.describe('Next Pokédex', () => {
     );
     await expect(error).toBeVisible();
   });
+  test('should select a generation', async ({ page }) => {
+    await page.goto('http://localhost:3000');
+    const dropdown = await page.locator('select');
+    await dropdown.selectOption('gen2');
+    await expect(dropdown).toHaveValue('gen2');
+  });
 });
