@@ -75,7 +75,7 @@ test.describe('Next Pokédex', () => {
     await page.goto('http://localhost:3000');
     const buttons = await page.locator('button').allInnerTexts();
     console.log('Visible buttons:', buttons);
-    await page.getByRole('button', { name: /generations/i }).click();
+    await page.locator('button').nth(0).click();
     const dropdown = page.locator(
       'select[data-testid="generation-select"]'
     );
