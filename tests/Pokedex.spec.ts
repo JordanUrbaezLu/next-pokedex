@@ -72,6 +72,7 @@ test.describe('Next Pokédex', () => {
   });
   test('should select a generation', async ({ page }) => {
     await page.goto('http://localhost:3000');
+    await page.getByRole('button', { name: /region/i }).click();
     const dropdown = page.locator(
       'select[data-testid="generation-select"]'
     );
