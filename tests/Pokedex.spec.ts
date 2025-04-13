@@ -73,7 +73,7 @@ test.describe('Next Pokédex', () => {
   test('Dropdown is visible on mobile screens', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('http://localhost:3000');
-    await page.getByRole('button', { name: /regions/i }).click();
+    await page.locator('button:has-text("Pokemon Regions")').click();
     const dropdown = page.getByTestId('mobile-dropdown');
     await expect(dropdown).toBeVisible();
   });
