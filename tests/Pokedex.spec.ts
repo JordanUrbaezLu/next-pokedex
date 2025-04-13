@@ -63,11 +63,10 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('http://localhost:3000/backend');
-    await page.waitForTimeout(1000);
-    const fullText = await page.locator('body').innerText();
-    console.log('🧪 Full page content:', fullText);
+    const content = await page.textContent('body');
+    console.log('🧪 Page text:', content);
     await expect(
-      page.locator('text=Hello from the backend')
+      page.locator('text=/Hello from the backend/i')
     ).toBeVisible();
   });
 });
