@@ -71,9 +71,10 @@ test.describe('Next Pokédex', () => {
     ).toBeVisible();
   });
   test('Dropdown is visible on mobile screens', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 }); // iPhone-ish size
+    await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('http://localhost:3000');
-    const dropdown = page.locator('select').first();
+    await page.getByRole('button', { name: /regions/i }).click();
+    const dropdown = page.getByTestId('mobile-dropdown');
     await expect(dropdown).toBeVisible();
   });
 });
