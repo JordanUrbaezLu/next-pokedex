@@ -73,12 +73,8 @@ test.describe('Next Pokédex', () => {
   test('should select a generation', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('http://localhost:3000');
-    const buttons = await page.locator('button').allInnerTexts();
-    console.log('Visible buttons:', buttons);
-    await page.locator('button').nth(0).click();
-    const dropdown = page.locator(
-      'select[data-testid="generation-select"]'
-    );
+    const dropdown = page.locator('select').first();
+    await expect(dropdown).toBeVisible();
     await dropdown.selectOption({ label: 'Gen II - Johto Region' });
     await expect(dropdown).toHaveValue('/generation/2');
   });
