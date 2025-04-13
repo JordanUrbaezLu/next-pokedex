@@ -63,10 +63,12 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('http://localhost:3000/backend');
-    const messageLocator = page.locator(
-      'text=/Hello from the backend/'
-    );
-    await expect(messageLocator).toBeVisible();
+    await page.waitForTimeout(1000);
+    const fullText = await page.locator('body').innerText();
+    console.log('🧪 Full page content:', fullText);
+    await expect(
+      page.locator('text=Hello from the backend')
+    ).toBeVisible();
   });
   test('Dropdown is visible on mobile screens', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 }); // iPhone-ish size
