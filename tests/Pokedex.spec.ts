@@ -70,13 +70,10 @@ test.describe('Next Pokédex', () => {
     );
     await expect(error).toBeVisible();
   });
-  test('Page should show Backend Page correctly', async ({
-    page,
-  }) => {
-    await page.goto('http://localhost:3000/backend');
-    const messageLocator = page.locator(
-      'text=/Hello from the backend/'
-    );
-    await expect(messageLocator).toBeVisible();
+  test('Dropdown is visible on mobile screens', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 }); // iPhone-ish size
+    await page.goto('http://localhost:3000');
+    const dropdown = page.locator('select').first();
+    await expect(dropdown).toBeVisible();
   });
 });
