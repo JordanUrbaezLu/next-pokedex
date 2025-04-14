@@ -9,17 +9,23 @@ const typeDefs = /* GraphQL */ `
   scalar JSON
 `;
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL!; // Add ! if you're sure it exists
+const NEXT_PUBLIC_BACKEND_API_URL =
+  process.env.NEXT_PUBLIC_BACKEND_API_URL!;
 
-const helloAPI = `${BACKEND_API_URL}/api/hello`;
+const helloAPI = `${NEXT_PUBLIC_BACKEND_API_URL}/api/hello`;
 
 const resolvers = {
   Query: {
     data: async () => {
       try {
-        const res = await fetch(helloAPI);
-        const json = await res.json();
-        return json;
+        const res = await fetch(helloAPI, {
+          headers: {
+            NEXT_POKEDEX_CONSUMER_ID:
+              process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+          },
+        });
+        const message = await res.text(); // parse plain text
+        return { message }; // wrap in an object so it's GraphQL-valid
       } catch (err) {
         console.error('Backend fetch error:', err);
         return null;
