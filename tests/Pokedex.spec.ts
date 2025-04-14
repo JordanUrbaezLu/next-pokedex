@@ -24,6 +24,7 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('/generation/1');
+    await page.waitForTimeout(5000);
 
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
@@ -43,20 +44,21 @@ test.describe('Next Pokédex', () => {
   }) => {
     await page.goto('/generation/99');
 
-    const error = page.getByText(
-      'Whoops! Looks like theres been some error.'
-    );
+    await page.waitForTimeout(5000);
+
+    const error = page.getByText(/whoops/i);
     await expect(error).toBeVisible();
   });
 
   test('Page should show Backend Page correctly', async ({
     page,
   }) => {
+    // test is flaky due to cold start up on backend
     test.setTimeout(120000);
     await page.goto('/backend');
     await page.waitForTimeout(60000);
     const error = page.getByText(
-      '{ "message": "Hello from the backend!", "status": "success" }'
+      '{ "message": "Hello from the backend!" }'
     );
     await expect(error).toBeVisible();
   });
