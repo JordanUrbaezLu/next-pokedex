@@ -8,7 +8,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     env:
-      BACKEND_API_URL: ${{ secrets.BACKEND_API_URL }}
+      NEXT_PUBLIC_BACKEND_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
