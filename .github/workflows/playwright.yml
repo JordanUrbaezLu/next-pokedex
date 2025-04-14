@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_BACKEND_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}
+      NEXT_PUBLIC_CONSUMER_ID: ${{secrets.NEXT_PUBLIC_CONSUMER_ID}}
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
