@@ -64,6 +64,7 @@ test.describe('Next Pokédex', () => {
     test.setTimeout(120000);
     await page.goto('/backend');
     await page.waitForTimeout(60000);
+
     const responseMessage = page.getByText(
       '{ "message": "Hello from the backend!" }'
     );
