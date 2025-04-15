@@ -29,8 +29,14 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('/generation/1');
+
     const mewtwoLocator = page.getByText('Mewtwo', { exact: true });
-    while (!(await mewtwoLocator.isVisible().catch(() => false))) {
+
+    for (let i = 0; i < 10; i++) {
+      const isMewtwoVisible = await mewtwoLocator
+        .isVisible()
+        .catch(() => false);
+      if (isMewtwoVisible) break;
       const loadMoreButton = page.getByRole('button', {
         name: 'Load More',
       });
@@ -42,6 +48,7 @@ test.describe('Next Pokédex', () => {
         page.waitForLoadState('networkidle'),
         loadMoreButton.click(),
       ]);
+      await page.waitForTimeout(300); // extra buffer
     }
     await expect(mewtwoLocator).toBeVisible();
   });
