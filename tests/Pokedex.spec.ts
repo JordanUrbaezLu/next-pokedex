@@ -25,27 +25,25 @@ test.describe('Next Pokédex', () => {
     await expect(title).toBeVisible();
   });
 
-  test('Pokedex should not exceed last pokemon in current generation', async ({
+  test('Pokedex should not exceed last Pokémon in current generation', async ({
     page,
   }) => {
     await page.goto('/generation/1');
-    while (true) {
-      const mewtwoLocator = page.getByText('Mewtwo', { exact: true });
-      if (await mewtwoLocator.isVisible().catch(() => false)) {
-        break;
-      }
-      const loadMore = page.getByRole('button', {
+    const mewtwoLocator = page.getByText('Mewtwo', { exact: true });
+    while (!(await mewtwoLocator.isVisible().catch(() => false))) {
+      const loadMoreButton = page.getByRole('button', {
         name: 'Load More',
       });
-      if (await loadMore.isVisible().catch(() => false)) {
-        await loadMore.click();
-        await page.waitForTimeout(300);
-      } else {
-        break;
-      }
+      const isLoadMoreVisible = await loadMoreButton
+        .isVisible()
+        .catch(() => false);
+      if (!isLoadMoreVisible) break;
+      await Promise.all([
+        page.waitForLoadState('networkidle'),
+        loadMoreButton.click(),
+      ]);
     }
-    const mewtwo = page.getByText('Mewtwo', { exact: true });
-    await expect(mewtwo).toBeVisible();
+    await expect(mewtwoLocator).toBeVisible();
   });
 
   test('Page should show Error Page on invalid url', async ({
