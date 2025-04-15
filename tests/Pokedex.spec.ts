@@ -60,11 +60,10 @@ test.describe('Next Pokédex', () => {
   test.skip('Page should show Backend Page correctly', async ({
     page,
   }) => {
+    // Increase timeout due to backend cold start
     test.setTimeout(120000);
     await page.goto('/backend');
-
     await page.waitForTimeout(60000);
-
     const responseMessage = page.getByText(
       '{ "message": "Hello from the backend!" }'
     );
