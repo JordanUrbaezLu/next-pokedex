@@ -7,14 +7,15 @@ import { useQuery } from '@tanstack/react-query';
 const Page = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['graphqlData'],
-    queryFn: () => fetchData(DATA_QUERY),
+    queryFn: () =>
+      fetchData({ query: DATA_QUERY, queryName: 'Data' }),
   });
 
   if (isLoading) {
     return <div>LOADING............</div>;
   }
 
-  return <div>{JSON.stringify(data, null, 2)}</div>;
+  return <div>{JSON.stringify(data?.data, null, 2)}</div>;
 };
 
 export default Page;
