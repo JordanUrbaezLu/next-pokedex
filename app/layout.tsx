@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import GenerationsContainer from '@/components/GenerationsContainer';
 import Title from '@/components/Title';
 import Providers from '@/components/Providers';
+import PokemonChatSupportBox from '@/components/PokemonChatSupportBox';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Title />
           <GenerationsContainer />
           {children}
+          <PokemonChatSupportBox />
         </Providers>
       </body>
       <Analytics />

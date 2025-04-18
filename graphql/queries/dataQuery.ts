@@ -1,5 +1,5 @@
 export const DATA_QUERY = `
-  query {
+  query Data {
     data
   }
 `;

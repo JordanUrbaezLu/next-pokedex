@@ -29,7 +29,7 @@ test.describe('Next Pokédex', () => {
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
       loadMoreBtn.click();
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(600);
     }
 
     const scrollUpBtn = page.getByText('Scroll Up');

@@ -1,9 +1,11 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { createYoga, createSchema } from 'graphql-yoga';
 import { NextRequest } from 'next/server';
 
 const typeDefs = /* GraphQL */ `
   type Query {
     data: JSON
+    isRelated(question: String!): Boolean
   }
 
   scalar JSON
@@ -29,6 +31,28 @@ const resolvers = {
       } catch (err) {
         console.error('Backend fetch error:', err);
         return null;
+      }
+    },
+    isRelated: async (_: any, args: { question: string }) => {
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/pokemon/related`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({ question: args.question }),
+          }
+        );
+
+        const data = await res.json();
+        return data.related === true;
+      } catch (err) {
+        console.error('Error calling /api/pokemon/related:', err);
+        return false;
       }
     },
   },

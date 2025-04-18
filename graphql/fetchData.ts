@@ -1,13 +1,22 @@
-export const fetchData = async (query: string) => {
-  const res = await fetch('/api/graphql', {
+export const fetchData = async ({
+  query,
+  queryName,
+  variables = {},
+}: {
+  query: string;
+  queryName: string;
+  variables?: any;
+}) => {
+  const res = await fetch(`/api/graphql?${queryName}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       query,
+      variables,
     }),
   });
 
   const { data, errors } = await res.json();
   if (errors) throw new Error(errors[0].message);
-  return data.data;
+  return data;
 };
