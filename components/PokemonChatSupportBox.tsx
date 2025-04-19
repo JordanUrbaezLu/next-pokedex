@@ -52,8 +52,6 @@ export default function ChatSupportBox() {
     enabled: relatedQ.data?.isRelated === true,
   });
 
-  console.log(findQ?.data);
-
   // submit handler only sets the “submittedQuestion”…
   const handleSubmit = () => {
     const trimmed = question.trim();
