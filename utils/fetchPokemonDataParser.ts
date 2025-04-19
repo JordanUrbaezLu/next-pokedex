@@ -15,7 +15,7 @@ export default async function fetchPokemonDataParser(
           myPoke?.name.charAt(0).toUpperCase() +
           myPoke?.name.slice(1),
         img: myPoke?.sprites?.other?.home?.front_default,
-        shinyImg: myPoke?.sprites?.front_shiny,
+        shinyImg: myPoke?.sprites?.other?.home?.front_shiny,
         type1: myPoke.types.at(0)?.type.name,
         type2: myPoke.types.at(1)?.type.name,
       };
