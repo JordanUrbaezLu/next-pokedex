@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: 'Next Pokedex',
 };
 
+/**
+ * @description
+ * The layout used for every page in the app
+ */
+
 export default function RootLayout({
   children,
 }: Readonly<{

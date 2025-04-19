@@ -8,6 +8,11 @@ import pokemonGenerations from '@/data/pokemonGenerations';
 import isValidParams from '@/utils/isValidParam';
 import { notFound } from 'next/navigation';
 
+/**
+ * @description
+ * Generations page that uses URL route to determine the generation to display
+ */
+
 const Generation = ({ params }: { params: any }) => {
   const param = React.use(params) as any;
   const validParams = isValidParams(param);

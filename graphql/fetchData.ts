@@ -1,3 +1,8 @@
+/**
+ * @description
+ * Fetch utility used for all GQL queries/mutations
+ */
+
 export const fetchData = async ({
   query,
   queryName,

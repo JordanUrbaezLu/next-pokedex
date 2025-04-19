@@ -1,4 +1,10 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+
+/**
+ * @description
+ * Button that loads more pokemon within a generation
+ */
+
 const LoadMoreButton = ({
   handleLoadMore,
   scrollUp,

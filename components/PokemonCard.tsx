@@ -6,12 +6,17 @@ import pokemonTypes from '../data/pokemonTypes';
 import { track } from '@vercel/analytics';
 import RingLoader from 'react-spinners/RingLoader';
 
+/**
+ * @description
+ * Each individual pokemon card that gets rendered
+ */
+
 const PokemonCard = ({
   pokemon,
-  useShiny,
+  isShiny,
 }: {
   pokemon: PokemonData;
-  useShiny?: boolean;
+  isShiny?: boolean;
 }) => {
   const [loading, setLoading] = React.useState(true);
 
@@ -55,7 +60,7 @@ const PokemonCard = ({
 
       <img
         className="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] md:max-h-[168px] md:min-h-[168px] md:max-w-[168px] md:min-w-[168px]"
-        src={useShiny ? pokemon?.shinyImg : pokemon?.img}
+        src={isShiny ? pokemon?.shinyImg : pokemon?.img}
         width={120}
         height={120}
         alt={`${pokemon.name} image`}

@@ -6,6 +6,11 @@ import { fetchData } from '@/graphql/fetchData';
 import { RELATED_QUERY } from '@/graphql/queries/relatedQuery';
 import { FIND_QUERY } from '@/graphql/queries/findQuery';
 
+/**
+ * @description
+ * The FindMyPokemon Chat Support Box
+ */
+
 export default function ChatSupportBox() {
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
@@ -13,7 +18,6 @@ export default function ChatSupportBox() {
     string | null
   >(null);
 
-  // history arrays
   const [pastDescriptions, setPastDescriptions] = useState<string[]>(
     []
   );
@@ -21,10 +25,8 @@ export default function ChatSupportBox() {
     []
   );
 
-  // flag for “unrelated” retry
   const [notRelated, setNotRelated] = useState(false);
 
-  // 1️⃣ Check “is it related?”
   const relatedQ = useQuery({
     queryKey: ['relatedCheck', submittedQuestion],
     queryFn: () =>
@@ -36,7 +38,6 @@ export default function ChatSupportBox() {
     enabled: !!submittedQuestion,
   });
 
-  // 2️⃣ Get the Pokémon guess (auto‑runs when relatedQ.data.isRelated becomes true)
   const findQ = useQuery({
     queryKey: ['findPokemon', submittedQuestion],
     queryFn: () =>
@@ -52,7 +53,6 @@ export default function ChatSupportBox() {
     enabled: relatedQ.data?.isRelated === true,
   });
 
-  // submit handler only sets the “submittedQuestion”…
   const handleSubmit = () => {
     const trimmed = question.trim();
     if (!trimmed) return;
@@ -61,22 +61,18 @@ export default function ChatSupportBox() {
     setNotRelated(false);
   };
 
-  // …then react to its “related?” result:
   useEffect(() => {
     if (!relatedQ.isSuccess) return;
 
     if (relatedQ.data?.isRelated) {
-      // ✅ related: move it into history, clear input
       setPastDescriptions((p) => [...p, submittedQuestion!]);
       setQuestion('');
     } else {
-      // ❌ not related: show retry, clear submission so textarea re‑enables
       setNotRelated(true);
       setSubmittedQuestion(null);
     }
   }, [relatedQ.isSuccess, relatedQ.data, submittedQuestion]);
 
-  // once we get a Pokémon, add it to guesses and clear submission
   useEffect(() => {
     if (findQ.isSuccess && findQ.data) {
       setPreviousGuesses((p) => [...p, findQ.data]);

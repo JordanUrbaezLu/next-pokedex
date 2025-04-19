@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+/**
+ * @description
+ * The fetching utility used to get the data for each individual pokemon in the pokemon list
+ */
+
 export default async function fetchPokemonDataParser(
   pokemonList: any[]
 ) {

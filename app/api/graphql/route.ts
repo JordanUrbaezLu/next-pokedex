@@ -2,6 +2,11 @@
 import { createYoga, createSchema } from 'graphql-yoga';
 import { NextRequest } from 'next/server';
 
+/**
+ * @description
+ * The defined GraphQL layer for the app
+ */
+
 const typeDefs = /* GraphQL */ `
   type Query {
     data: JSON
