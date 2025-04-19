@@ -6,7 +6,13 @@ import pokemonTypes from '../data/pokemonTypes';
 import { track } from '@vercel/analytics';
 import RingLoader from 'react-spinners/RingLoader';
 
-const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
+const PokemonCard = ({
+  pokemon,
+  useShiny,
+}: {
+  pokemon: PokemonData;
+  useShiny?: boolean;
+}) => {
   const [loading, setLoading] = React.useState(true);
 
   // wait for image to be completely loaded before you remove loader
@@ -49,7 +55,7 @@ const PokemonCard = ({ pokemon }: { pokemon: PokemonData }) => {
 
       <img
         className="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] md:max-h-[168px] md:min-h-[168px] md:max-w-[168px] md:min-w-[168px]"
-        src={pokemon?.img || ''}
+        src={useShiny ? pokemon?.shinyImg : pokemon?.img}
         width={120}
         height={120}
         alt={`${pokemon.name} image`}
