@@ -1,3 +1,8 @@
+/**
+ * @description
+ * List of generations and the data needed to render the app properly
+ */
+
 const pokemonGenerations = [
   {
     url: 'https://wallpaperaccess.com/full/24934.jpg',

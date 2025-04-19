@@ -2,6 +2,11 @@
 import Link from 'next/link';
 import React from 'react';
 
+/**
+ * @description
+ * Each individual generation button in the generation container
+ */
+
 const GenerationButton = ({ generation }: { generation: any }) => {
   return (
     <div className="flex">

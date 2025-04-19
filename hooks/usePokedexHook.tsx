@@ -1,9 +1,13 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import pokemonGenerations from '@/data/pokemonGenerations';
 import fetchPokemonDataParser from '@/utils/fetchPokemonDataParser';
 import React from 'react';
 
 const GLOBAL_LIMIT = 20;
+
+/**
+ * @description
+ * The main hook for the app where most of the state logic is stored
+ */
 
 const usePokedexHook = ({ generation }: { generation?: any }) => {
   const [pokemonList, setPokemonList] = React.useState<any[]>([]);

@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+/**
+ * @description
+ * Type mapping used to display proper type images
+ */
+
 const pokemonTypes = {
   normal:
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png',

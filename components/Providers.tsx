@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { useState } from 'react';
+import { ShinyProvider } from '@/contexts/ShinyProvider';
 
 export default function Providers({
   children,
@@ -15,7 +16,7 @@ export default function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <ShinyProvider>{children}</ShinyProvider>
     </QueryClientProvider>
   );
 }
