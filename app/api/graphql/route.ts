@@ -6,6 +6,11 @@ const typeDefs = /* GraphQL */ `
   type Query {
     data: JSON
     isRelated(question: String!): Boolean
+    findPokemon(
+      question: String!
+      pastDescriptions: [String!]!
+      previousGuesses: [String!]!
+    ): String
   }
 
   scalar JSON
@@ -53,6 +58,38 @@ const resolvers = {
       } catch (err) {
         console.error('Error calling /api/pokemon/related:', err);
         return false;
+      }
+    },
+    findPokemon: async (
+      _: any,
+      args: {
+        question: string;
+        pastDescriptions: string[];
+        previousGuesses: string[];
+      }
+    ) => {
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/pokemon/find`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({
+              question: args.question,
+              pastDescriptions: args.pastDescriptions,
+              previousGuesses: args.previousGuesses,
+            }),
+          }
+        );
+        const { answer } = await res.json();
+        return answer;
+      } catch (err) {
+        console.error('Error calling /api/pokemon/find:', err);
+        return '';
       }
     },
   },
