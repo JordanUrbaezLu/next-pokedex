@@ -3,7 +3,6 @@
 import { PokemonData } from '@/types/PokemonData';
 import React from 'react';
 import pokemonTypes from '../data/pokemonTypes';
-import { track } from '@vercel/analytics';
 import RingLoader from 'react-spinners/RingLoader';
 
 /**
@@ -14,9 +13,11 @@ import RingLoader from 'react-spinners/RingLoader';
 const PokemonCard = ({
   pokemon,
   isShiny,
+  handleClick,
 }: {
   pokemon: PokemonData;
   isShiny?: boolean;
+  handleClick: () => void;
 }) => {
   const [loading, setLoading] = React.useState(true);
 
@@ -44,7 +45,7 @@ const PokemonCard = ({
                  shadow-md hover:shadow-lg 
                  transition-colors duration-200 ease-out 
                  text-xs md:text-sm font-bold pokemon-font"
-      onClick={() => track(pokemon.name)}
+      onClick={handleClick}
     >
       {loading && (
         <div className="p-2 md:p-[20px]">

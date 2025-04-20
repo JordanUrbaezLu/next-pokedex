@@ -24,6 +24,14 @@ export default async function fetchPokemonDataParser(
         shinyImg: myPoke?.sprites?.other?.home?.front_shiny,
         type1: myPoke.types.at(0)?.type.name,
         type2: myPoke.types.at(1)?.type.name,
+        stats: {
+          hp: myPoke?.stats[0]?.base_stat,
+          attack: myPoke?.stats[1]?.base_stat,
+          defense: myPoke?.stats[2]?.base_stat,
+          specialAttack: myPoke?.stats[3]?.base_stat,
+          specialDefense: myPoke?.stats[4]?.base_stat,
+          speed: myPoke?.stats[5]?.base_stat,
+        },
       };
     })
   );
