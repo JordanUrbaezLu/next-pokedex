@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { fetchData } from '@/graphql/fetchData';
 import {
   LOGIN_MUTATION,
@@ -26,7 +27,6 @@ const LoginPage = () => {
         localStorage.setItem('token', token);
         alert(`Welcome ${data?.login?.name}!`);
       }
-      console.log('Data:', data);
     },
     onError: (err: any) => {
       alert(err.message || 'Login failed');
