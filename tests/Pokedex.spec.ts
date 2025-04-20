@@ -53,13 +53,29 @@ test.describe('Next Pokédex', () => {
   test('Page should show Backend Page correctly', async ({
     page,
   }) => {
-    // test is flaky due to cold start up on backend
-    test.setTimeout(120000);
     await page.goto('/backend');
-    await page.waitForTimeout(60000);
+    await page.waitForTimeout(5000);
     const error = page.getByText(
       '{ "message": "Hello from the backend!" }'
     );
     await expect(error).toBeVisible();
+  });
+
+  test('should login and access account page', async ({ page }) => {
+    await page.goto('/login');
+
+    await page.fill('input[type="email"]', 'jordan@gmail.com');
+    await page.fill('input[type="password"]', '1234');
+    await page.click('button:has-text("Login")');
+
+    await page.waitForTimeout(5000);
+
+    await page.goto('/account');
+
+    await page.waitForTimeout(5000);
+
+    const name = page.getByText('NAME: Jordan');
+
+    await expect(name).toBeVisible();
   });
 });

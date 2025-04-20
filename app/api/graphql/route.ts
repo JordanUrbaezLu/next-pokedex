@@ -19,6 +19,16 @@ const typeDefs = /* GraphQL */ `
     account(token: String!): Account
   }
 
+  type Mutation {
+    login(email: String!, password: String!): LoginResponse!
+  }
+
+  type LoginResponse {
+    token: String!
+    name: String!
+    email: String!
+  }
+
   type Account {
     name: String!
     email: String!
@@ -127,6 +137,41 @@ const resolvers = {
       } catch (err) {
         console.error('Error calling /api/account:', err);
         return '';
+      }
+    },
+  },
+  Mutation: {
+    login: async (
+      _: any,
+      args: { email: string; password: string }
+    ) => {
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/login`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({
+              email: args.email,
+              password: args.password,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'Login failed');
+        }
+
+        const data = await res.json(); // should be { token, name, email }
+        return data;
+      } catch (err) {
+        console.error('Error during login:', err);
+        throw new Error('Invalid credentials');
       }
     },
   },

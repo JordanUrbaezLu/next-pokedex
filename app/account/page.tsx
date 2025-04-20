@@ -34,8 +34,18 @@ const Page = () => {
 
   return (
     <div className="p-2">
-      <div>NAME: {accountQ?.data?.account?.name}</div>
-      <div>EMAIL: {accountQ?.data?.account?.email}</div>
+      <div>
+        NAME:{' '}
+        {accountQ.isFetching
+          ? 'Fetching...'
+          : accountQ?.data?.account?.name}
+      </div>
+      <div>
+        EMAIL:{' '}
+        {accountQ.isFetching
+          ? 'Fetching...'
+          : accountQ?.data?.account?.email}
+      </div>
     </div>
   );
 };
