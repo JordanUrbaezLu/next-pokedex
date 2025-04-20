@@ -1,7 +1,17 @@
 const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-300/40 backdrop-blur-sm mt-1">
-      <form className="bg-blue-300/40 p-6 rounded-md shadow-md w-100 h-90 text-center">
+      <form className="relative bg-blue-300/40 p-6 rounded-md shadow-md w-full max-w-md text-center">
+        <img
+          src="/pokeball.png"
+          alt="Pokéball"
+          className="w-10 h-10 mx-auto mb-4 borer rounded-md ml-2 mt-1"
+        />
+        <img
+          src="/pokemonlogo.png"
+          alt="Pokemon Logo"
+          className="w-30 h-30 mx-auto mb-4 -mt-26"
+        />
         <h1 className="text-xl font-bold mb-2 ">Next Pokedex</h1>
         <h2 className="text-lg font-bold mb-4">Login</h2>
         <input
