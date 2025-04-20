@@ -35,7 +35,6 @@
     "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "concurrently": "^9.1.2",
     "eslint": "^9.22.0",
