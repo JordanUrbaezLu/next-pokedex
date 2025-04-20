@@ -1,7 +1,10 @@
 'use client';
 
 import { fetchData } from '@/graphql/fetchData';
-import { DATA_QUERY } from '@/graphql/queries/dataQuery';
+import {
+  DATA_QUERY,
+  DATA_QUERY_NAME,
+} from '@/graphql/queries/dataQuery';
 import { useQuery } from '@tanstack/react-query';
 
 /**
@@ -11,9 +14,9 @@ import { useQuery } from '@tanstack/react-query';
 
 const Page = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ['graphqlData'],
+    queryKey: [DATA_QUERY_NAME],
     queryFn: () =>
-      fetchData({ query: DATA_QUERY, queryName: 'Data' }),
+      fetchData({ query: DATA_QUERY, queryName: DATA_QUERY_NAME }),
   });
 
   if (isLoading) {

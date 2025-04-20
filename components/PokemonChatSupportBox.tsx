@@ -3,8 +3,14 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '@/graphql/fetchData';
-import { RELATED_QUERY } from '@/graphql/queries/relatedQuery';
-import { FIND_QUERY } from '@/graphql/queries/findQuery';
+import {
+  RELATED_QUERY,
+  RELATED_QUERY_NAME,
+} from '@/graphql/queries/relatedQuery';
+import {
+  FIND_QUERY,
+  FIND_QUERY_NAME,
+} from '@/graphql/queries/findQuery';
 
 /**
  * @description
@@ -28,22 +34,22 @@ export default function ChatSupportBox() {
   const [notRelated, setNotRelated] = useState(false);
 
   const relatedQ = useQuery({
-    queryKey: ['relatedCheck', submittedQuestion],
+    queryKey: [RELATED_QUERY_NAME, submittedQuestion],
     queryFn: () =>
       fetchData({
         query: RELATED_QUERY,
-        queryName: 'isRelated',
+        queryName: RELATED_QUERY_NAME,
         variables: { question: submittedQuestion },
       }),
     enabled: !!submittedQuestion,
   });
 
   const findQ = useQuery({
-    queryKey: ['findPokemon', submittedQuestion],
+    queryKey: [FIND_QUERY_NAME, submittedQuestion],
     queryFn: () =>
       fetchData({
         query: FIND_QUERY,
-        queryName: 'findPokemon',
+        queryName: FIND_QUERY_NAME,
         variables: {
           question: submittedQuestion,
           pastDescriptions,

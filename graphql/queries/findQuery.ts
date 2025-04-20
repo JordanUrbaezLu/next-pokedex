@@ -1,13 +1,15 @@
-export const FIND_QUERY = `
+export const FIND_QUERY = /* GraphQL */ `
   query FindPokemon(
-    $question: String!,
-    $pastDescriptions: [String!]!,
+    $question: String!
+    $pastDescriptions: [String!]!
     $previousGuesses: [String!]!
   ) {
     findPokemon(
-      question: $question,
-      pastDescriptions: $pastDescriptions,
+      question: $question
+      pastDescriptions: $pastDescriptions
       previousGuesses: $previousGuesses
     )
   }
 `;
+
+export const FIND_QUERY_NAME = 'findPokemonQuery';

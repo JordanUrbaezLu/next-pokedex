@@ -16,6 +16,12 @@ const typeDefs = /* GraphQL */ `
       pastDescriptions: [String!]!
       previousGuesses: [String!]!
     ): String
+    account(token: String!): Account
+  }
+
+  type Account {
+    name: String!
+    email: String!
   }
 
   scalar JSON
@@ -94,6 +100,32 @@ const resolvers = {
         return answer;
       } catch (err) {
         console.error('Error calling /api/pokemon/find:', err);
+        return '';
+      }
+    },
+    account: async (
+      _: any,
+      args: {
+        token: string;
+      }
+    ) => {
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/account`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+              Authorization: `Bearer ${args.token}`,
+            },
+          }
+        );
+        const json = await res.json();
+        return json; // assuming it returns { name, email }
+      } catch (err) {
+        console.error('Error calling /api/account:', err);
         return '';
       }
     },
