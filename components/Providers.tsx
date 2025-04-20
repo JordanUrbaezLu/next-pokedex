@@ -1,11 +1,16 @@
 'use client';
 
+import { ShinyProvider } from '@/contexts/ShinyProvider';
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { useState } from 'react';
-import { ShinyProvider } from '@/contexts/ShinyProvider';
+
+/**
+ * @description
+ * The set of state providers that wraps the entire project
+ */
 
 export default function Providers({
   children,

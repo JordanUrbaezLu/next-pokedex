@@ -5,4 +5,12 @@ export type PokemonData = {
   shinyImg?: string;
   type1?: string;
   type2?: string;
+  stats?: {
+    hp?: number;
+    attack?: number;
+    defense?: number;
+    specialAttack?: number;
+    specialDefense?: number;
+    speed?: number;
+  };
 };
