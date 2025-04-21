@@ -6,6 +6,7 @@ import GenerationsContainer from '@/components/GenerationsContainer';
 import Title from '@/components/Title';
 import Providers from '@/components/Providers';
 import PokemonChatSupportBox from '@/components/PokemonChatSupportBox';
+import LoginButton from '@/components/LoginButton';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className={poppins.variable}>
       <body className="antialiased">
         <Providers>
+          <LoginButton />
           <Title />
           <GenerationsContainer />
           {children}
