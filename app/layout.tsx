@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import { Analytics } from '@vercel/analytics/next';
 import GenerationsContainer from '@/components/GenerationsContainer';
 import Title from '@/components/Title';
 import Providers from '@/components/Providers';
 import PokemonChatSupportBox from '@/components/PokemonChatSupportBox';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -35,6 +36,8 @@ export default function RootLayout({
           <GenerationsContainer />
           {children}
           <PokemonChatSupportBox />
+          <SpeedInsights />
+          <Analytics mode="production" />;
         </Providers>
       </body>
       <Analytics />
