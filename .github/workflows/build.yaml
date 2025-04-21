@@ -37,5 +37,16 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
+      - name: Cache Next.js build cache
+        uses: actions/cache@v3
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json', 'next.config.js') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
+
+      - name: Disable Next.js telemetry
+        run: npx next telemetry disable
+
       - name: Build Next.js app
         run: npm run build

@@ -19,16 +19,18 @@ jobs:
           node-version: 20
 
       - name: Cache node_modules
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-lint-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-lint-deps-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-lint-
+            ${{ runner.os }}-lint-deps-
 
-      - name: Install dependencies
+      - name: Install dependencies (if no cache)
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Run Lint
