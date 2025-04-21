@@ -37,7 +37,7 @@ export default function RootLayout({
           {children}
           <PokemonChatSupportBox />
           <SpeedInsights />
-          <Analytics mode="production" />;
+          <Analytics mode="production" />
         </Providers>
       </body>
       <Analytics />
