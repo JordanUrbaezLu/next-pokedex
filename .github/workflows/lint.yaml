@@ -9,15 +9,27 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_BACKEND_API_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }}
-      NEXT_PUBLIC_CONSUMER_ID: ${{secrets.NEXT_PUBLIC_CONSUMER_ID}}
+      NEXT_PUBLIC_CONSUMER_ID: ${{ secrets.NEXT_PUBLIC_CONSUMER_ID }}
 
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm install 
-      - run: npm install -g eslint 
-      - run: npm install -g stylelint
-      - run: npm isntall -g typescript
-      - run: npm run lint
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-lint-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-lint-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lint
+        run: npm run lint
