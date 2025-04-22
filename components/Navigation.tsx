@@ -13,6 +13,7 @@ const Navigation = () => {
       <Button href="/search" name="Search" />
       <Button href="/account" name="Account" />
       <Button href="/login" name="Login" />
+      <Button href="signup" name="signup" />
     </div>
   );
 };
