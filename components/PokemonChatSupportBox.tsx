@@ -87,7 +87,7 @@ export default function ChatSupportBox() {
   }, [findQ.isSuccess, findQ.data]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-80 font-sans">
+    <div className="w-90 m-4">
       {!open ? (
         <button
           onClick={() => setOpen(true)}

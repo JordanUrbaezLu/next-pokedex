@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginButton from '@/components/LoginButton';
+import LoginButton from '@/components/Button';
 
 /**
  * @description
@@ -10,7 +10,6 @@ export default async function Home() {
   return (
     <div className="p-6">
       <div>Welcome to the Next Pokédex Home Page</div>
-      <LoginButton />
     </div>
   );
 }
