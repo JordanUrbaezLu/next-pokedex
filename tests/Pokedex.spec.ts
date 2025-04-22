@@ -7,6 +7,8 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Next Pokédex', () => {
   test('Should show all generation buttons', async ({ page }) => {
+    await page.goto('/generation');
+    await page.waitForTimeout(5000);
     for (const gen of pokemonGenerations) {
       const pokemonGen = page.getByText(gen.name);
       await expect(pokemonGen).toBeVisible();
@@ -77,5 +79,18 @@ test.describe('Next Pokédex', () => {
     const name = page.getByText('NAME: Jordan');
 
     await expect(name).toBeVisible();
+  });
+
+  test('should show nav bar correctly', async ({ page }) => {
+    await page.goto('/');
+
+    const genBtn = page.getByText('Generations');
+    await expect(genBtn).toBeVisible();
+    const searchBtn = page.getByText('Search');
+    await expect(searchBtn).toBeVisible();
+    const accountBtn = page.getByText('Account');
+    await expect(accountBtn).toBeVisible();
+    const loginBtn = page.getByText('Login');
+    await expect(loginBtn).toBeVisible();
   });
 });

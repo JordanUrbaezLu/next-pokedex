@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import GenerationsContainer from '@/components/GenerationsContainer';
 import Title from '@/components/Title';
 import Providers from '@/components/Providers';
-import PokemonChatSupportBox from '@/components/PokemonChatSupportBox';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Navigation from '@/components/Navigation';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,9 +32,8 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <Title />
-          <GenerationsContainer />
+          <Navigation />
           {children}
-          <PokemonChatSupportBox />
           <SpeedInsights />
           <Analytics mode="production" />
         </Providers>
