@@ -5,6 +5,11 @@
 import Link from 'next/link';
 import React from 'react';
 
+/**
+ * @description
+ * The Button used across the app for navigation
+ */
+
 const Button = ({ name, href }: { name: string; href: any }) => {
   return (
     <Link
