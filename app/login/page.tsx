@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable  @next/next/no-img-element */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { fetchData } from '@/graphql/fetchData';
 import {
