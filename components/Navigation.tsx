@@ -1,5 +1,10 @@
 import Button from '@/components/Button';
 
+/**
+ * @description
+ * The Navigation Bar displayed on every page
+ */
+
 const Navigation = () => {
   return (
     <div className="flex gap-1">
