@@ -16,21 +16,20 @@ export default async function fetchPokemonDataParser(
       );
       console.log(myPoke);
       return {
-        id: '#' + myPoke?.id?.toString().padStart(4, '0'),
+        id: '#' + myPoke.id.toString().padStart(4, '0'),
         name:
-          myPoke?.name.charAt(0).toUpperCase() +
-          myPoke?.name.slice(1),
-        img: myPoke?.sprites?.other?.home?.front_default,
-        shinyImg: myPoke?.sprites?.other?.home?.front_shiny,
-        type1: myPoke.types.at(0)?.type.name,
-        type2: myPoke.types.at(1)?.type.name,
+          myPoke.name.charAt(0).toUpperCase() + myPoke.name.slice(1),
+        img: myPoke.sprites.other['official-artwork'].front_default, // ✅ Image loaded here
+        shinyImg: myPoke.sprites.other.home.front_shiny,
+        type1: myPoke.types?.[0]?.type?.name,
+        type2: myPoke.types?.[1]?.type?.name ?? undefined,
         stats: {
-          hp: myPoke?.stats[0]?.base_stat,
-          attack: myPoke?.stats[1]?.base_stat,
-          defense: myPoke?.stats[2]?.base_stat,
-          specialAttack: myPoke?.stats[3]?.base_stat,
-          specialDefense: myPoke?.stats[4]?.base_stat,
-          speed: myPoke?.stats[5]?.base_stat,
+          hp: myPoke.stats[0]?.base_stat,
+          attack: myPoke.stats[1]?.base_stat,
+          defense: myPoke.stats[2]?.base_stat,
+          specialAttack: myPoke.stats[3]?.base_stat,
+          specialDefense: myPoke.stats[4]?.base_stat,
+          speed: myPoke.stats[5]?.base_stat,
         },
       };
     })
