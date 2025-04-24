@@ -3,6 +3,11 @@ import { PokemonData } from '@/types/PokemonData';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 
+/**
+ * @description
+ * The Display Card that shows when a pokemon card is clicked
+ */
+
 const DisplayCardModal = ({
   isDisplayCardOpen,
   handleClose,
