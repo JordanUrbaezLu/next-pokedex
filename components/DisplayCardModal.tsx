@@ -20,12 +20,12 @@ const DisplayCardModal = ({
   const maxStat = 255;
 
   const statBarColor = (value: number) => {
-    if (value > 180) return 'bg-pink-500';
     if (value > 150) return 'bg-purple-500';
-    if (value > 120) return 'bg-green-500';
-    if (value > 90) return 'bg-yellow-500';
-    if (value > 60) return 'bg-orange-500';
-    if (value > 30) return 'bg-red-500';
+    if (value > 125) return 'bg-sky-500';
+    if (value > 100) return 'bg-green-500';
+    if (value > 75) return 'bg-yellow-500';
+    if (value > 50) return 'bg-orange-500';
+    if (value > 25) return 'bg-red-500';
     return 'bg-red-500';
   };
 
@@ -50,6 +50,17 @@ const DisplayCardModal = ({
         <div className="text-lg font-bold mb-4 text-black">
           Pokemon Display Card
         </div>
+
+        {displayedPokemon?.img && (
+          <div className="flex justify-center mb-4">
+            <img
+              src={displayedPokemon.img}
+              alt={displayedPokemon.name}
+              className="w-20 h-20"
+            />
+          </div>
+        )}
+
         <div className="text-xl font-bold mb-4 text-black">
           {displayedPokemon?.name}
         </div>
