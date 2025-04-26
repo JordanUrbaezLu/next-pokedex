@@ -87,24 +87,31 @@ export default function ChatSupportBox() {
   }, [findQ.isSuccess, findQ.data]);
 
   return (
-    <div className="w-90 m-4">
+    <div className="w-90 m-3 ml-37">
       {!open ? (
-        <button
-          onClick={() => setOpen(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded shadow-md hover:bg-blue-700"
-        >
-          💬 Chat Support
-        </button>
+        <div className="flex">
+          <button
+            onClick={() => setOpen(true)}
+            className="bg-gray-400 text-white px-7 py-2 rounded shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-300 hover:-translate-y-2 hover:shadow-lg active:scale-95 cursor-pointer"
+          >
+            💬 Chat Support
+          </button>
+        </div>
       ) : (
-        <div className="bg-white border shadow-lg rounded-lg p-4">
+        <div className="bg-sky-200 border shadow-lg rounded-lg p-5">
           {/* Header */}
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Find My Pokémon</h2>
-            <button onClick={() => setOpen(false)}>✕</button>
+            <button
+              className="cursor-pointer rounded-full px-2 shadow-md hover:bg-red-300 hover:shadow-[0_0_10px_red] transition-shadow duration-100"
+              onClick={() => setOpen(false)}
+            >
+              ✕
+            </button>
           </div>
 
           {/* Chat history */}
-          <div className="mb-3 max-h-40 overflow-auto">
+          <div className="mb-3 max-h-40 overflow-auto rounded shadow-md border">
             {pastDescriptions.map((desc, i) => (
               <div key={i} className="mb-2">
                 <p className="text-sm">
@@ -131,12 +138,12 @@ export default function ChatSupportBox() {
           <button
             onClick={handleSubmit}
             disabled={!!submittedQuestion}
-            className="mt-2 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+            className="mt-2 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-sky-700 disabled:opacity-50 cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg active:scale-95 cursor-pointer"
           >
             Ask
           </button>
 
-          {/* Related status or retry message */}
+          {/* Status messages */}
           {relatedQ.isFetching && (
             <p className="mt-2 text-sm">Checking relevance…</p>
           )}
@@ -153,8 +160,6 @@ export default function ChatSupportBox() {
                 Related? <strong>✅ Yes</strong>
               </p>
             )}
-
-          {/* Guessing */}
           {findQ.isFetching && (
             <p className="mt-2 text-sm">Guessing Pokémon…</p>
           )}
