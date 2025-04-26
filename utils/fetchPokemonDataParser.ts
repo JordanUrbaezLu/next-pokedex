@@ -19,7 +19,7 @@ export default async function fetchPokemonDataParser(
         id: '#' + myPoke.id.toString().padStart(4, '0'),
         name:
           myPoke.name.charAt(0).toUpperCase() + myPoke.name.slice(1),
-        img: myPoke.sprites.other['official-artwork'].front_default, // ✅ Image loaded here
+        img: myPoke?.sprites?.other?.home?.front_default,
         shinyImg: myPoke.sprites.other.home.front_shiny,
         type1: myPoke.types?.[0]?.type?.name,
         type2: myPoke.types?.[1]?.type?.name ?? undefined,
