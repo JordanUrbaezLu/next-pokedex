@@ -1,6 +1,6 @@
 export const ACCOUNT_QUERY = /* GraphQL */ `
-  query Account($token: String!) {
-    account(token: $token) {
+  query Account {
+    account {
       name
       email
     }
