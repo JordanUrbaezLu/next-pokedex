@@ -20,17 +20,20 @@ const DisplayCardModal = ({
   const maxStat = 255;
 
   const statBarColor = (value: number) => {
-    if (value > 150) return 'bg-purple-500';
-    if (value > 125) return 'bg-sky-500';
-    if (value > 100) return 'bg-green-500';
-    if (value > 75) return 'bg-yellow-500';
-    if (value > 50) return 'bg-orange-500';
-    if (value > 25) return 'bg-red-500';
+    if (value >= 150) return 'bg-purple-500';
+    if (value >= 125) return 'bg-sky-500';
+    if (value >= 100) return 'bg-green-500';
+    if (value >= 75) return 'bg-yellow-500';
+    if (value >= 50) return 'bg-orange-500';
     return 'bg-red-500';
   };
 
   return (
-    <Modal open={isDisplayCardOpen} onClose={handleClose}>
+    <Modal
+      open={isDisplayCardOpen}
+      onClose={handleClose}
+      disableScrollLock
+    >
       <div className="relative w-[360px] h-auto bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-md border-4 border-black text-white shadow-lg">
         <div className="absolute top-2 right-2">
           <img
