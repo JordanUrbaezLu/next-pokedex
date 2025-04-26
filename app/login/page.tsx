@@ -111,10 +111,7 @@ const LoginPage = () => {
 
         <button
           data-testid="login-button"
-          onClick={() => {
-            console.log('CLICKED!');
-            loginMutation.mutate({ email, password });
-          }}
+          onClick={() => loginMutation.mutate({ email, password })}
           disabled={disabled}
           className="w-full bg-red-500 text-white py-2 rounded shadow-md transition-all duration-300 ease-in-out hover:bg-green-600 hover:-translate-y-1 hover:shadow-lg active:scale-95 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
