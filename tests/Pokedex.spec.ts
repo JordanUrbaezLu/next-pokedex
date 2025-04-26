@@ -68,7 +68,7 @@ test.describe('Next Pokédex', () => {
 
     await page.fill('input[type="email"]', 'jordan@gmail.com');
     await page.fill('input[type="pw"]', '1234');
-    await page.click('button:has-text("Login")');
+    await page.click('[data-testid="login-button"]');
 
     await page.waitForTimeout(6000);
 
