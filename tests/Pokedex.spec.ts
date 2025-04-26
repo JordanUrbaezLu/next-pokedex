@@ -63,22 +63,30 @@ test.describe('Next Pokédex', () => {
     await expect(error).toBeVisible();
   });
 
-  test('should login and access account page', async ({ page }) => {
+  test('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
     await page.fill('input[type="email"]', 'jordan@gmail.com');
-    await page.fill('input[type="password"]', '1234');
+    await page.fill('input[type="pw"]', '1234');
     await page.click('button:has-text("Login")');
 
-    await page.waitForTimeout(5000);
-
-    await page.goto('/account');
-
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(6000);
 
     const name = page.getByText('NAME: Jordan');
 
     await expect(name).toBeVisible();
+
+    const logoutBtn = page.getByText('Logout');
+    await expect(logoutBtn).toBeVisible();
+
+    await page.click('button:has-text("Logout")');
+
+    await page.waitForTimeout(2000);
+
+    const homeTitle = page.getByText(
+      'Welcome to the Next Pokédex Home Page'
+    );
+    await expect(homeTitle).toBeVisible();
   });
 
   test('should show nav bar correctly', async ({ page }) => {

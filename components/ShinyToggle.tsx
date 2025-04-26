@@ -1,6 +1,6 @@
 'use client';
 
-import { useShiny } from '@/contexts/ShinyProvider';
+import { useShiny } from '@/contexts/ShinyContext';
 import Switch from '@mui/material/Switch';
 
 /**

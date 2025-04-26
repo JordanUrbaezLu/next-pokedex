@@ -1,7 +1,7 @@
 import { PokemonData } from '@/types/PokemonData';
 import React from 'react';
 import PokemonCard from './PokemonCard';
-import { useShiny } from '@/contexts/ShinyProvider';
+import { useShiny } from '@/contexts/ShinyContext';
 import useDisplayCardHook from '@/hooks/useDisplayCardHook';
 import DisplayCardModal from './DisplayCardModal';
 

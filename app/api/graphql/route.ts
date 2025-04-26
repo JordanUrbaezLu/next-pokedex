@@ -1,6 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { createYoga, createSchema } from 'graphql-yoga';
 import { NextRequest } from 'next/server';
+import { JSONResolver } from 'graphql-scalars';
 
 /**
  * @description
@@ -16,7 +17,7 @@ const typeDefs = /* GraphQL */ `
       pastDescriptions: [String!]!
       previousGuesses: [String!]!
     ): String
-    account(token: String!): Account
+    account: Account
   }
 
   type Mutation {
@@ -39,7 +40,6 @@ const typeDefs = /* GraphQL */ `
 
 const NEXT_PUBLIC_BACKEND_API_URL =
   process.env.NEXT_PUBLIC_BACKEND_API_URL!;
-
 const helloAPI = `${NEXT_PUBLIC_BACKEND_API_URL}/api/hello`;
 
 const resolvers = {
@@ -52,13 +52,14 @@ const resolvers = {
               process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
           },
         });
-        const message = await res.text(); // parse plain text
-        return { message }; // wrap in an object so it's GraphQL-valid
+        const message = await res.text();
+        return { message };
       } catch (err) {
         console.error('Backend fetch error:', err);
         return null;
       }
     },
+
     isRelated: async (_: any, args: { question: string }) => {
       try {
         const res = await fetch(
@@ -81,6 +82,7 @@ const resolvers = {
         return false;
       }
     },
+
     findPokemon: async (
       _: any,
       args: {
@@ -113,12 +115,11 @@ const resolvers = {
         return '';
       }
     },
-    account: async (
-      _: any,
-      args: {
-        token: string;
-      }
-    ) => {
+
+    account: async (_: any, __: any, context: { token?: string }) => {
+      const token = context.token;
+      if (!token) return null;
+
       try {
         const res = await fetch(
           `${NEXT_PUBLIC_BACKEND_API_URL}/api/account`,
@@ -128,18 +129,20 @@ const resolvers = {
               'Content-Type': 'application/json',
               NEXT_POKEDEX_CONSUMER_ID:
                 process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
-              Authorization: `Bearer ${args.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
+
         const json = await res.json();
-        return json; // assuming it returns { name, email }
+        return json;
       } catch (err) {
         console.error('Error calling /api/account:', err);
-        return '';
+        return null;
       }
     },
   },
+
   Mutation: {
     login: async (
       _: any,
@@ -167,7 +170,7 @@ const resolvers = {
           throw new Error(message || 'Login failed');
         }
 
-        const data = await res.json(); // should be { token, name, email }
+        const data = await res.json();
         return data;
       } catch (err) {
         console.error('Error during login:', err);
@@ -175,23 +178,26 @@ const resolvers = {
       }
     },
   },
+
+  JSON: JSONResolver,
 };
 
-// You can use a JSON scalar to allow arbitrary JSON objects
-import { JSONResolver } from 'graphql-scalars';
-
-const yoga = createYoga<{
-  req: NextRequest;
-}>({
+const yoga = createYoga<{ req: NextRequest }>({
   schema: createSchema({
     typeDefs,
-    resolvers: {
-      ...resolvers,
-      JSON: JSONResolver,
-    },
-  }),
+    resolvers,
+  }) as any,
+  context: async ({ req }) => {
+    const cookieToken = req.cookies.get('token')?.value;
+    const authHeader = req.headers.get('authorization');
+    const bearerToken = authHeader?.startsWith('Bearer ')
+      ? authHeader.slice(7)
+      : undefined;
+    const token = bearerToken || cookieToken;
+    return { token };
+  },
   graphqlEndpoint: '/api/graphql',
-  fetchAPI: { Request, Response }, // Needed for Next.js compatibility
+  fetchAPI: { Request, Response },
   graphiql: process.env.NODE_ENV !== 'production',
 });
 

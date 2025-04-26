@@ -7,12 +7,12 @@ import {
   ReactNode,
 } from 'react';
 
-type ShinyContextValue = {
+type ShinyContextType = {
   isShiny: boolean;
   toggleShiny: () => void;
 };
 
-const ShinyContext = createContext<ShinyContextValue>({
+const ShinyContext = createContext<ShinyContextType>({
   isShiny: false,
   toggleShiny: () => {},
 });
