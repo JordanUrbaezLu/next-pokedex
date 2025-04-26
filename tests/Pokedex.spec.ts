@@ -98,6 +98,8 @@ test.describe('Next Pokédex', () => {
     await expect(searchBtn).toBeVisible();
     const accountBtn = page.getByText('Account');
     await expect(accountBtn).toBeVisible();
+    const signupBtn = page.getByText('Signup');
+    await expect(signupBtn).toBeVisible();
     const loginBtn = page.getByText('Login');
     await expect(loginBtn).toBeVisible();
   });
