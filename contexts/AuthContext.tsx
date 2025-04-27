@@ -23,6 +23,7 @@ interface AuthContextType {
   refreshAuth: () => Promise<void>;
   setAuthType: (authType: AuthType) => void;
   setUser: (user: User | null) => void;
+  isLoggedIn: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(
@@ -81,6 +82,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }));
   };
 
+  const isLoggedIn = authType !== 'guest';
+
   return (
     <AuthContext.Provider
       value={{
@@ -90,6 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         refreshAuth,
         setAuthType,
         setUser,
+        isLoggedIn,
       }}
     >
       {children}
