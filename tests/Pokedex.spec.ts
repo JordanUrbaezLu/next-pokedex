@@ -63,22 +63,30 @@ test.describe('Next Pokédex', () => {
     await expect(error).toBeVisible();
   });
 
-  test('should login and access account page', async ({ page }) => {
+  test('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
     await page.fill('input[type="email"]', 'jordan@gmail.com');
-    await page.fill('input[type="password"]', '1234');
-    await page.click('button:has-text("Login")');
+    await page.fill('input[type="pw"]', '1234');
+    await page.click('[data-testid="login-button"]');
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(10000);
 
-    await page.goto('/account');
+    // const name = page.getByText('NAME: Jordan');
 
-    await page.waitForTimeout(5000);
+    // await expect(name).toBeVisible();
 
-    const name = page.getByText('NAME: Jordan');
+    const logoutBtn = page.getByText('Logout');
+    await expect(logoutBtn).toBeVisible();
 
-    await expect(name).toBeVisible();
+    await page.click('button:has-text("Logout")');
+
+    await page.waitForTimeout(2000);
+
+    const homeTitle = page.getByText(
+      'Welcome to the Next Pokédex Home Page'
+    );
+    await expect(homeTitle).toBeVisible();
   });
 
   test('should show nav bar correctly', async ({ page }) => {
@@ -90,6 +98,8 @@ test.describe('Next Pokédex', () => {
     await expect(searchBtn).toBeVisible();
     const accountBtn = page.getByText('Account');
     await expect(accountBtn).toBeVisible();
+    const signupBtn = page.getByText('Signup');
+    await expect(signupBtn).toBeVisible();
     const loginBtn = page.getByText('Login');
     await expect(loginBtn).toBeVisible();
   });

@@ -1,4 +1,5 @@
 import Button from '@/components/Button';
+import AuthButton from './AuthButton';
 
 /**
  * @description
@@ -7,13 +8,17 @@ import Button from '@/components/Button';
 
 const Navigation = () => {
   return (
-    <div className="flex gap-1">
-      <Button href="/" name="Home" data-test-id="Home" />
-      <Button href="/generation" name="Generations" />
-      <Button href="/search" name="Search" />
-      <Button href="/account" name="Account" />
-      <Button href="/login" name="Login" />
-      <Button href="Signup" name="Signup" />
+    <div className="flex flex-row justify-between">
+      <div className="flex gap-1">
+        <Button href="/" name="Home" data-test-id="Home" />
+        <Button href="/generation" name="Generations" />
+        <Button href="/search" name="Search" />
+        <Button href="/account" name="Account" />
+        <Button href="Signup" name="Signup" />
+      </div>
+      <div className="mr-10">
+        <AuthButton />
+      </div>
     </div>
   );
 };

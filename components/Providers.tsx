@@ -1,6 +1,7 @@
 'use client';
 
-import { ShinyProvider } from '@/contexts/ShinyProvider';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ShinyProvider } from '@/contexts/ShinyContext';
 import {
   QueryClient,
   QueryClientProvider,
@@ -30,7 +31,9 @@ export default function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ShinyProvider>{children}</ShinyProvider>
+      <ShinyProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </ShinyProvider>
     </QueryClientProvider>
   );
 }
