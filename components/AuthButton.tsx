@@ -4,14 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 
 const AuthButton = () => {
-  const { authType, refreshAuth, loading } = useAuth();
+  const { refreshAuth, loading, isLoggedIn } = useAuth();
   const router = useRouter();
 
   if (loading) {
     return null;
   }
-
-  const isLoggedIn = authType !== 'guest';
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });

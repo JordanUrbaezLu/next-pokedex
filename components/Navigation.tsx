@@ -14,7 +14,7 @@ const Navigation = () => {
         <Button href="/generation" name="Generations" />
         <Button href="/search" name="Search" />
         <Button href="/account" name="Account" />
-        <Button href="Signup" name="Signup" />
+        <Button href="/signup" name="Signup" />
       </div>
       <div className="mr-10">
         <AuthButton />

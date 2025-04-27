@@ -22,9 +22,20 @@ const typeDefs = /* GraphQL */ `
 
   type Mutation {
     login(email: String!, password: String!): LoginResponse!
+    signup(
+      email: String!
+      password: String!
+      name: String!
+    ): SignupResponse!
   }
 
   type LoginResponse {
+    token: String!
+    name: String!
+    email: String!
+  }
+
+  type SignupResponse {
     token: String!
     name: String!
     email: String!
@@ -174,6 +185,44 @@ const resolvers = {
         return data;
       } catch (err) {
         console.error('Error during login:', err);
+        throw new Error('Invalid credentials');
+      }
+    },
+    signup: async (
+      _: any,
+      args: { email: string; password: string; name: string }
+    ) => {
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/signup`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({
+              email: args.email,
+              password: args.password,
+              name: args.name,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'Signup failed');
+        }
+
+        const data = await res.json();
+        return {
+          name: data.user.name,
+          token: data.token,
+          email: data.user.email,
+        };
+      } catch (err) {
+        console.error('Error during signup:', err);
         throw new Error('Invalid credentials');
       }
     },

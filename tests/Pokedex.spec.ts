@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 test.describe('Next Pokédex', () => {
   test('Should show all generation buttons', async ({ page }) => {
     await page.goto('/generation');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
     for (const gen of pokemonGenerations) {
       const pokemonGen = page.getByText(gen.name);
       await expect(pokemonGen).toBeVisible();
@@ -46,7 +46,7 @@ test.describe('Next Pokédex', () => {
   }) => {
     await page.goto('/generation/99');
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
 
     const error = page.getByText(/whoops/i);
     await expect(error).toBeVisible();
@@ -56,7 +56,7 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('/backend');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(3000);
     const error = page.getByText(
       '{ "message": "Hello from the backend!" }'
     );
@@ -70,18 +70,18 @@ test.describe('Next Pokédex', () => {
     await page.fill('input[type="pw"]', '1234');
     await page.click('[data-testid="login-button"]');
 
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(3000);
 
-    // const name = page.getByText('NAME: Jordan');
+    const name = page.getByText('NAME: Jordan');
 
-    // await expect(name).toBeVisible();
+    await expect(name).toBeVisible();
 
     const logoutBtn = page.getByText('Logout');
     await expect(logoutBtn).toBeVisible();
 
     await page.click('button:has-text("Logout")');
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(500);
 
     const homeTitle = page.getByText(
       'Welcome to the Next Pokédex Home Page'
@@ -102,5 +102,38 @@ test.describe('Next Pokédex', () => {
     await expect(signupBtn).toBeVisible();
     const loginBtn = page.getByText('Login');
     await expect(loginBtn).toBeVisible();
+  });
+
+  test('user can successfully signup', async ({ page }) => {
+    await page.goto('/signup');
+
+    await page.waitForTimeout(1500);
+
+    const date = Date.now();
+
+    await page.fill('input[type="name"]', 'Ash');
+    await page.fill('input[type="email"]', `Ash${date}@gmail.com`);
+    await page.fill('input[type="pw"]', '1234');
+    await page.fill('input[type="re-pw"]', '1234');
+
+    await page.click('[data-testid="signup-button"]');
+
+    await page.waitForTimeout(3000);
+
+    const name = page.getByText('NAME: Ash');
+
+    await expect(name).toBeVisible();
+
+    const logoutBtn = page.getByText('Logout');
+    await expect(logoutBtn).toBeVisible();
+
+    await page.click('button:has-text("Logout")');
+
+    await page.waitForTimeout(500);
+
+    const homeTitle = page.getByText(
+      'Welcome to the Next Pokédex Home Page'
+    );
+    await expect(homeTitle).toBeVisible();
   });
 });
