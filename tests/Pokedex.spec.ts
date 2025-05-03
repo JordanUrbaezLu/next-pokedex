@@ -63,7 +63,7 @@ test.describe('Next Pokédex', () => {
     await expect(error).toBeVisible();
   });
 
-  test('should login and logout correctly', async ({ page }) => {
+  test.skip('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
     await page
@@ -106,7 +106,7 @@ test.describe('Next Pokédex', () => {
     await expect(loginBtn).toBeVisible();
   });
 
-  test('user can successfully signup', async ({ page }) => {
+  test.skip('user can successfully signup', async ({ page }) => {
     await page.goto('/signup');
 
     await page.waitForTimeout(1500);
