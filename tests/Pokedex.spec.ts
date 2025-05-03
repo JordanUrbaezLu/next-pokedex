@@ -73,7 +73,7 @@ test.describe('Next Pokédex', () => {
     await page.getByPlaceholder('Password').fill('123');
     await page.click('[data-testid="login-button"]');
 
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(6000);
 
     const name = page.getByText('NAME: 33');
 
@@ -109,12 +109,13 @@ test.describe('Next Pokédex', () => {
 
   test('user can successfully signup', async ({ page }) => {
     await page.goto('/signup');
+    await expect(page).toHaveURL(/\/signup/);
 
     const date = Date.now();
 
-    await page.waitForTimeout(2000);
-
-    await page.fill('input[placeholder="Name"]', 'Ash');
+    const nameInput = page.locator('input[placeholder="Name"]');
+    await expect(nameInput).toBeVisible({ timeout: 10000 });
+    await nameInput.fill('Ash');
     await page
       .getByPlaceholder('Email/Username')
       .fill(`Ash${date}@gmail.com`);
