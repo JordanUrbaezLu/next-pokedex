@@ -26,7 +26,7 @@ test.describe('Next Pokédex', () => {
     page,
   }) => {
     await page.goto('/generation/1');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(4000);
 
     for (let i = 0; i < 7; i++) {
       const loadMoreBtn = page.getByText('Load More');
@@ -66,8 +66,10 @@ test.describe('Next Pokédex', () => {
   test('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
-    await page.fill('input[type="email"]', 'user33@gmail.com');
-    await page.fill('input[type="pw"]', '123');
+    await page
+      .getByPlaceholder('Email/Username')
+      .fill(`user33@gmail.com`);
+    await page.getByPlaceholder('Password').fill('123');
     await page.click('[data-testid="login-button"]');
 
     await page.waitForTimeout(3000);
@@ -107,14 +109,16 @@ test.describe('Next Pokédex', () => {
   test('user can successfully signup', async ({ page }) => {
     await page.goto('/signup');
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1500);
 
     const date = Date.now();
 
-    await page.fill('input[type="name"]', 'Ash');
-    await page.fill('input[type="email"]', `Ash${date}@gmail.com`);
-    await page.fill('input[type="pw"]', '1234');
-    await page.fill('input[type="re-pw"]', '1234');
+    await page.fill('input[placeholder="Name"]', 'Ash');
+    await page
+      .getByPlaceholder('Email/Username')
+      .fill(`Ash${date}@gmail.com`);
+    await page.fill('input[placeholder="Password"]', '1234');
+    await page.getByPlaceholder('Re-enter Password').fill('1234');
 
     await page.click('[data-testid="signup-button"]');
 
