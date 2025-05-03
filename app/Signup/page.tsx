@@ -134,25 +134,25 @@ const SignupPage = () => {
           Forgot password?
         </button>
         <input
-          type="name"
+          data-testid="name"
           placeholder="Name"
           className="w-full mb-3 px-3 py-2 border rounded-md"
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          type="email"
+          data-testid="email"
           placeholder="Email/Username"
           className="w-full mb-3 px-3 py-2 border rounded-md"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          type="pw"
+          data-testid="pw"
           placeholder="Password"
           className="w-full mb-4 px-3 py-2 border rounded-md"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="re-pw"
+          data-testid="re-pw"
           placeholder="Re-enter Password"
           className="w-full mb-4 px-3 py-2 border rounded-md"
           onChange={(e) => setReEnterPassword(e.target.value)}

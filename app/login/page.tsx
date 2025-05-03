@@ -95,14 +95,14 @@ const LoginPage = () => {
         )}
 
         <input
-          type="email"
+          data-testid="email"
           placeholder="Email/Username"
           className="w-full mb-3 px-3 py-2 border rounded-md"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          type="pw"
+          data-testid="pw"
           placeholder="Password"
           className="w-full mb-4 px-3 py-2 border rounded-md"
           value={password}
