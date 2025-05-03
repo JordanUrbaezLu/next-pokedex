@@ -66,13 +66,13 @@ test.describe('Next Pokédex', () => {
   test('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
-    await page.fill('input[type="email"]', 'jordan@gmail.com');
-    await page.fill('input[type="pw"]', '1234');
+    await page.fill('input[type="email"]', 'user33@gmail.com');
+    await page.fill('input[type="pw"]', '123');
     await page.click('[data-testid="login-button"]');
 
     await page.waitForTimeout(3000);
 
-    const name = page.getByText('NAME: Jordan');
+    const name = page.getByText('NAME: 33');
 
     await expect(name).toBeVisible();
 
