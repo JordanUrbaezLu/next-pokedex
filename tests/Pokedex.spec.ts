@@ -1,7 +1,8 @@
 import pokemonGenerations from '@/data/pokemonGenerations';
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
+  await context.clearCookies();
   await page.goto('/');
 });
 
