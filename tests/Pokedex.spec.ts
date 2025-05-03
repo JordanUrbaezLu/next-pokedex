@@ -107,7 +107,7 @@ test.describe('Next Pokédex', () => {
   test('user can successfully signup', async ({ page }) => {
     await page.goto('/signup');
 
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2000);
 
     const date = Date.now();
 
