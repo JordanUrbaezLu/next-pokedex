@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 import { useAuth } from '@/contexts/AuthContext';
+import { sleep } from '@/utils/sleep';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -48,8 +49,8 @@ const LoginPage = () => {
           severity: 'success',
           message: 'Login Successful!',
         });
-
-        setTimeout(() => router.push('/account'), 1500);
+        await sleep(1750);
+        router.push('/account');
       } else {
         setAlertState({
           isOpen: true,

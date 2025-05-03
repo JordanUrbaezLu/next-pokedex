@@ -1,7 +1,8 @@
 import pokemonGenerations from '@/data/pokemonGenerations';
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
+  await context.clearCookies();
   await page.goto('/');
 });
 
@@ -63,7 +64,7 @@ test.describe('Next Pokédex', () => {
     await expect(error).toBeVisible();
   });
 
-  test.skip('should login and logout correctly', async ({ page }) => {
+  test('should login and logout correctly', async ({ page }) => {
     await page.goto('/login');
 
     await page
@@ -72,7 +73,7 @@ test.describe('Next Pokédex', () => {
     await page.getByPlaceholder('Password').fill('123');
     await page.click('[data-testid="login-button"]');
 
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(6000);
 
     const name = page.getByText('NAME: 33');
 
@@ -106,14 +107,15 @@ test.describe('Next Pokédex', () => {
     await expect(loginBtn).toBeVisible();
   });
 
-  test.skip('user can successfully signup', async ({ page }) => {
+  test('user can successfully signup', async ({ page }) => {
     await page.goto('/signup');
-
-    await page.waitForTimeout(1500);
+    await expect(page).toHaveURL(/\/signup/);
 
     const date = Date.now();
 
-    await page.fill('input[placeholder="Name"]', 'Ash');
+    const nameInput = page.locator('input[placeholder="Name"]');
+    await expect(nameInput).toBeVisible({ timeout: 10000 });
+    await nameInput.fill('Ash');
     await page
       .getByPlaceholder('Email/Username')
       .fill(`Ash${date}@gmail.com`);
