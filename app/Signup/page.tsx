@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 import { useAuth } from '@/contexts/AuthContext';
+import { sleep } from '@/utils/sleep';
 
 const SignupPage = () => {
   const router = useRouter();
@@ -61,7 +62,8 @@ const SignupPage = () => {
           message: 'Signup Successful!',
         });
 
-        setTimeout(() => router.push('/account'), 1500);
+        await sleep(1750);
+        router.push('/account');
       } else {
         setAlertState({
           isOpen: true,
