@@ -24,7 +24,7 @@ const PokemonCardsContainer = ({
   } = useDisplayCardHook();
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap mt-1 px-32 gap-[34px] m-6">
       {pokemonList.map((pokemon: PokemonData, index) => {
         return (
           <PokemonCard
