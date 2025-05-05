@@ -38,7 +38,7 @@ const PokemonCard = ({
                  max-h-[230px] md:max-h-[265px] 
                  p-1 md:p-4 
                  m-1 md:m-2 
-                 bg-white
+                 bg-gray-200
                  cursor-pointer 
                  hover:bg-gray-300 active:bg-gray-500 
                  shadow-md hover:shadow-lg 
