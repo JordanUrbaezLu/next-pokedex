@@ -14,14 +14,14 @@
 }
 
 body {
-  background: url(src/assets/landscape.png);
   color: var(--foreground);
   font-family: 'Poppins';
+  background-color: rgba(48, 47, 47, 0.658);
 }
 
 .title {
   font-family: 'Moderniz', sans-serif;
-  color: white;
+  color: rgb(180, 12, 12);
   font-size: 48px;
 }
 .pokemon-font {
