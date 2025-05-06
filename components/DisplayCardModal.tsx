@@ -20,11 +20,11 @@ const DisplayCardModal = ({
   const maxStat = 255;
 
   const statBarColor = (value: number) => {
-    if (value >= 150) return 'bg-purple-500';
-    if (value >= 125) return 'bg-sky-500';
-    if (value >= 100) return 'bg-green-500';
-    if (value >= 75) return 'bg-yellow-500';
-    if (value >= 50) return 'bg-orange-500';
+    if (value >= 150) return 'bg-red-1000';
+    if (value >= 125) return 'bg-red-800';
+    if (value >= 100) return 'bg-red-600';
+    if (value >= 75) return 'bg-red-400';
+    if (value >= 50) return 'bg-red-200';
     return 'bg-red-500';
   };
 
@@ -34,14 +34,7 @@ const DisplayCardModal = ({
       onClose={handleClose}
       disableScrollLock
     >
-      <div className="relative w-[360px] h-auto bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-md border-4 border-black text-white shadow-lg">
-        <div className="absolute top-2 right-2">
-          <img
-            src="/pokedex.png"
-            alt="pokedex"
-            className="w-10 h-10"
-          />
-        </div>
+      <div className="relative w-[360px] h-auto bg-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 shadow-lg">
         {/* Close Button */}
         <IconButton
           onClick={handleClose}
@@ -50,8 +43,8 @@ const DisplayCardModal = ({
           <CloseIcon />
         </IconButton>
 
-        <div className="text-lg font-bold mb-4 text-black">
-          Pokemon Display Card
+        <div className="text-xl font-bold mb-3 text-black text-center">
+          {displayedPokemon?.name}
         </div>
 
         {displayedPokemon?.img && (
@@ -63,10 +56,6 @@ const DisplayCardModal = ({
             />
           </div>
         )}
-
-        <div className="text-xl font-bold mb-4 text-black">
-          {displayedPokemon?.name}
-        </div>
 
         {/* Stat Bars */}
         {Object.entries(displayedPokemon?.stats || {}).map(
@@ -80,9 +69,9 @@ const DisplayCardModal = ({
                   <span>{key.replace(/([A-Z])/g, ' $1')}</span>
                   <span>{value}</span>
                 </div>
-                <div className="w-full bg-gray-300 rounded-full h-3">
+                <div className="w-full bg-gray-500 rounded-half h-3">
                   <div
-                    className={`h-3 rounded-full ${statBarColor(value)}`}
+                    className={`h-3 rounded-half ${statBarColor(value)}`}
                     style={{ width: `${fillPercent}%` }}
                   />
                 </div>
