@@ -9,9 +9,9 @@ import React from 'react';
 
 const GenerationButton = ({ generation }: { generation: any }) => {
   return (
-    <div className="flex">
+    <div className="flex pl-8 ml-10 translate-x-30">
       <Link
-        className="p-2 m-2 rounded-md border-3 border-sky-500 bg-sky-200 cursor-pointer hover:bg-sky-300 active:bg-sky-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-sm font-bold"
+        className="p-1 mt-2 mb-3 bg-gray-200 cursor-pointer hover:bg-gray-300 active:bg-gray-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-xs font-bold"
         href={generation.href}
       >
         {generation.name}
