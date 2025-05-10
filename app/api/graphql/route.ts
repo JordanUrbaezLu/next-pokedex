@@ -18,6 +18,8 @@ const typeDefs = /* GraphQL */ `
       previousGuesses: [String!]!
     ): String
     account: Account
+    friends: [Friend!]!
+    pendingRequests: [Request!]!
   }
 
   type Mutation {
@@ -27,6 +29,18 @@ const typeDefs = /* GraphQL */ `
       password: String!
       name: String!
     ): SignupResponse!
+  }
+
+  type Friend {
+    name: String!
+    email: String!
+    acceptedAt: String!
+  }
+
+  type Request {
+    name: String!
+    email: String!
+    requestedAt: String!
   }
 
   type LoginResponse {
@@ -150,6 +164,62 @@ const resolvers = {
       } catch (err) {
         console.error('Error calling /api/account:', err);
         return null;
+      }
+    },
+
+    friends: async (_: any, __: any, context: { token?: string }) => {
+      const token = context.token;
+      if (!token) return [];
+
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/friends/list`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const friendsList = await res.json();
+        return friendsList;
+      } catch (err) {
+        console.error('Error fetching friends:', err);
+        return [];
+      }
+    },
+
+    pendingRequests: async (
+      _: any,
+      __: any,
+      context: { token?: string }
+    ) => {
+      const token = context.token;
+      if (!token) return [];
+
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/friends/pending`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const friendsList = await res.json();
+        return friendsList;
+      } catch (err) {
+        console.error('Error fetching pending requests:', err);
+        return [];
       }
     },
   },
