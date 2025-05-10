@@ -1,8 +1,9 @@
 import pokemonGenerations from '@/data/pokemonGenerations';
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
   await page.goto('/');
+  await context.clearCookies();
 });
 
 test.describe('Next Pokédex', () => {
@@ -72,7 +73,7 @@ test.describe('Next Pokédex', () => {
     await page.getByPlaceholder('Password').fill('123');
     await page.click('[data-testid="login-button"]');
 
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(8000);
 
     const name = page.getByText('NAME: 33');
 
@@ -139,5 +140,24 @@ test.describe('Next Pokédex', () => {
       'Welcome to the Next Pokédex Home Page'
     );
     await expect(homeTitle).toBeVisible();
+  });
+
+  test('should show friends and pending requests correctly', async ({
+    page,
+  }) => {
+    await page.goto('/login');
+    await page
+      .getByPlaceholder('Email/Username')
+      .fill(`user33@gmail.com`);
+    await page.getByPlaceholder('Password').fill('123');
+    await page.click('[data-testid="login-button"]');
+    await page.waitForTimeout(3000);
+
+    await page.goto('/friends');
+    await page.waitForTimeout(3000);
+    const friend = page.getByText('Name: 32');
+    await expect(friend).toBeVisible();
+    const pending = page.getByText('Name: 34');
+    await expect(pending).toBeVisible();
   });
 });
