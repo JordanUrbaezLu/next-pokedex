@@ -9,12 +9,13 @@ export function middleware(req: NextRequest) {
   const isLogin = pathname.startsWith('/login');
   const isSignup = pathname.startsWith('/signup');
   const isAccount = pathname.startsWith('/account');
+  const isFriends = pathname.startsWith('/friends');
 
   if (isAuth && (isLogin || isSignup)) {
     return NextResponse.redirect(new URL('/account', req.url));
   }
 
-  if (!isAuth && isAccount) {
+  if (!isAuth && (isAccount || isFriends)) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
@@ -22,5 +23,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login', '/signup', '/account'],
+  matcher: ['/login', '/signup', '/account', '/friends/:path*'],
 };

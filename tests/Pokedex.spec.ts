@@ -155,9 +155,23 @@ test.describe('Next Pokédex', () => {
 
     await page.goto('/friends');
     await page.waitForTimeout(3000);
-    const friend = page.getByText('Name: 32');
+    const friend = page.getByText('user32');
     await expect(friend).toBeVisible();
-    const pending = page.getByText('Name: 34');
+    const pending = page.getByText('user34');
     await expect(pending).toBeVisible();
+
+    await page.goto('/friends/add');
+    await page.getByPlaceholder('Enter user ID').fill(`34`);
+    await page.click('button:has-text("Add Friend")');
+    await page.waitForTimeout(4000);
+    const existError = page.getByText(
+      'Friendship already exists or pending'
+    );
+    await expect(existError).toBeVisible();
+    await page.getByPlaceholder('Enter user ID').fill(`1111111111`);
+    await page.click('button:has-text("Add Friend")');
+    await page.waitForTimeout(4000);
+    const invalidUserError = page.getByText('Invalid users');
+    await expect(invalidUserError).toBeVisible();
   });
 });
