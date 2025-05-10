@@ -2,6 +2,7 @@
 import { createYoga, createSchema } from 'graphql-yoga';
 import { NextRequest } from 'next/server';
 import { JSONResolver } from 'graphql-scalars';
+import { GraphQLError } from 'graphql';
 
 /**
  * @description
@@ -29,6 +30,7 @@ const typeDefs = /* GraphQL */ `
       password: String!
       name: String!
     ): SignupResponse!
+    friendRequest(targetUserId: Int!): FriendRequestResponse!
   }
 
   type Friend {
@@ -53,6 +55,10 @@ const typeDefs = /* GraphQL */ `
     token: String!
     name: String!
     email: String!
+  }
+
+  type FriendRequestResponse {
+    message: String!
   }
 
   type Account {
@@ -294,6 +300,49 @@ const resolvers = {
       } catch (err) {
         console.error('Error during signup:', err);
         throw new Error('Invalid credentials');
+      }
+    },
+    friendRequest: async (
+      _: any,
+      args: { targetUserId: number },
+      context: { token?: string }
+    ): Promise<{ message: string }> => {
+      const token = context.token;
+      if (!token) {
+        throw new GraphQLError('Unauthorized', {
+          extensions: { code: 'UNAUTHORIZED', expose: true },
+        });
+      }
+
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/friends/request`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({ targetUserId: args.targetUserId }),
+          }
+        );
+
+        const message = await res.text();
+
+        if (!res.ok) {
+          throw new GraphQLError(message || 'Request failed', {
+            extensions: { code: 'BAD_REQUEST', expose: true },
+          });
+        }
+
+        return { message: message || 'Friend request sent' };
+      } catch (err: any) {
+        console.error('Friend request error:', err);
+        throw new GraphQLError(err.message || 'Unexpected error', {
+          extensions: { code: 'INTERNAL_SERVER_ERROR', expose: true },
+        });
       }
     },
   },
