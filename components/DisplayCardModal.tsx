@@ -20,7 +20,7 @@ const DisplayCardModal = ({
   const maxStat = 255;
 
   const statBarColor = (value: number) => {
-    if (value >= 150) return 'bg-red-1000';
+    if (value >= 150) return 'bg-red-900';
     if (value >= 125) return 'bg-red-800';
     if (value >= 100) return 'bg-red-600';
     if (value >= 75) return 'bg-red-400';
