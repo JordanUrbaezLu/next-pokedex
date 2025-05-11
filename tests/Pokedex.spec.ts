@@ -11,7 +11,10 @@ test.describe('Next Pokédex', () => {
     await page.goto('/generation');
     await page.waitForTimeout(2000);
     for (const gen of pokemonGenerations) {
-      const pokemonGen = page.getByText(gen.name);
+      const pokemonGen = page.getByRole('link', {
+        name: gen.name,
+        exact: true,
+      });
       await expect(pokemonGen).toBeVisible();
     }
   });
