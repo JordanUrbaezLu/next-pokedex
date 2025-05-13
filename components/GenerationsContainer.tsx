@@ -14,7 +14,7 @@ import ShinyToggle from './ShinyToggle';
 const GenerationsContainer = () => {
   return (
     <div className="flex flex-wrap">
-      <div className="fixed top-4 right-4 z-50 p-2">
+      <div className="fixed top-4 right-4 z-50 p-2 ">
         <ShinyToggle />
       </div>
       {pokemonGenerations.map((generation: any, index) => {

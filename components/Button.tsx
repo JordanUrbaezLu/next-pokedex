@@ -10,11 +10,19 @@ import React from 'react';
  * The Button used across the app for navigation
  */
 
-const Button = ({ name, href }: { name: string; href: any }) => {
+interface ButtonProps {
+  name: string;
+  href: string;
+}
+
+const Button = ({ name, href }: ButtonProps) => {
   return (
     <Link
       href={href}
-      className="p-2 m-2 rounded-md border-3 border-green-500 bg-green-200 cursor-pointer hover:bg-green-300 active:bg-green-500 shadow-md transition-colors duration-200 ease-out hover:shadow-lg text-sm font-bold"
+      className="inline-block px-2 py-2 text-white bg-red-700 rounded-full 
+             shadow-md hover:shadow-lg active:shadow-sm 
+             hover:bg-red-800 active:bg-red-900 
+             active:scale-90 transition-all duration-100 text-sm"
     >
       {name}
     </Link>
