@@ -9,7 +9,7 @@ import AuthButton from './AuthButton';
 const Navigation = () => {
   return (
     <div className="flex flex-row justify-between">
-      <div className="flex gap-1 pl-75 translate-x-75 pt-4 mt-4">
+      <div className="flex gap-2 pl-90 translate-x-90 pt-4 mt-4">
         <Button href="/" name="Home" data-test-id="Home" />
         <Button href="/generation" name="Generations" />
         <Button href="/search" name="Search" />
