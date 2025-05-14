@@ -12,30 +12,54 @@ import {
   PENDING_REQUESTS_QUERY_NAME,
 } from '@/graphql/queries/pendingRequestsQuery';
 import convertToDate from '@/utils/convertToDate';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Divider } from '@mui/material';
 import Button from '@/components/Button';
+import {
+  ACCEPT_FRIEND_REQUEST_MUTATION,
+  ACCEPT_FRIEND_REQUEST_MUTATION_NAME,
+} from '@/graphql/mutations/acceptFriendRequestMutation';
 
 const FriendsPage = () => {
-  const { data: friendsData, isLoading: friendsDataLoading } =
-    useQuery({
-      queryKey: [FRIENDS_QUERY],
-      queryFn: () =>
-        fetchData({
-          query: FRIENDS_QUERY,
-          queryName: FRIENDS_QUERY_NAME,
-        }),
-    });
+  const {
+    data: friendsData,
+    isLoading: friendsDataLoading,
+    refetch: friendsRefetch,
+  } = useQuery({
+    queryKey: [FRIENDS_QUERY],
+    queryFn: () =>
+      fetchData({
+        query: FRIENDS_QUERY,
+        queryName: FRIENDS_QUERY_NAME,
+      }),
+  });
 
-  const { data: pendingData, isLoading: pendingDataLoading } =
-    useQuery({
-      queryKey: [PENDING_REQUESTS_QUERY],
-      queryFn: () =>
-        fetchData({
-          query: PENDING_REQUESTS_QUERY,
-          queryName: PENDING_REQUESTS_QUERY_NAME,
-        }),
-    });
+  const {
+    data: pendingData,
+    isLoading: pendingDataLoading,
+    refetch: pendingRefetch,
+  } = useQuery({
+    queryKey: [PENDING_REQUESTS_QUERY],
+    queryFn: () =>
+      fetchData({
+        query: PENDING_REQUESTS_QUERY,
+        queryName: PENDING_REQUESTS_QUERY_NAME,
+      }),
+  });
+
+  const acceptFriendRequestMutation = useMutation({
+    mutationKey: [ACCEPT_FRIEND_REQUEST_MUTATION_NAME],
+    mutationFn: (variables: { targetUserId: number }) =>
+      fetchData({
+        query: ACCEPT_FRIEND_REQUEST_MUTATION,
+        queryName: ACCEPT_FRIEND_REQUEST_MUTATION_NAME,
+        variables,
+      }),
+    onSuccess: () => {
+      pendingRefetch();
+      friendsRefetch();
+    },
+  });
 
   const friendsList = friendsData?.friends as any[];
   const pendingList = pendingData?.pendingRequests as any[];
@@ -99,6 +123,14 @@ const FriendsPage = () => {
                     {convertToDate(request?.requestedAt)}
                   </span>
                 </div>
+                <Button
+                  name="Accept Request"
+                  onClick={() =>
+                    acceptFriendRequestMutation.mutate({
+                      targetUserId: request.id,
+                    })
+                  }
+                />
               </div>
             ))}
           </div>

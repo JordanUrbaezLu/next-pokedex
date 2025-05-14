@@ -31,6 +31,9 @@ const typeDefs = /* GraphQL */ `
       name: String!
     ): SignupResponse!
     friendRequest(targetUserId: Int!): FriendRequestResponse!
+    acceptFriendRequest(
+      targetUserId: Int!
+    ): AcceptFriendRequestResponse!
   }
 
   type Friend {
@@ -43,6 +46,7 @@ const typeDefs = /* GraphQL */ `
     name: String!
     email: String!
     requestedAt: String!
+    id: Int!
   }
 
   type LoginResponse {
@@ -58,6 +62,10 @@ const typeDefs = /* GraphQL */ `
   }
 
   type FriendRequestResponse {
+    message: String!
+  }
+
+  type AcceptFriendRequestResponse {
     message: String!
   }
 
@@ -340,6 +348,50 @@ const resolvers = {
         return { message: message || 'Friend request sent' };
       } catch (err: any) {
         console.error('Friend request error:', err);
+        throw new GraphQLError(err.message || 'Unexpected error', {
+          extensions: { code: 'INTERNAL_SERVER_ERROR', expose: true },
+        });
+      }
+    },
+
+    acceptFriendRequest: async (
+      _: any,
+      args: { targetUserId: number },
+      context: { token?: string }
+    ): Promise<{ message: string }> => {
+      const token = context.token;
+      if (!token) {
+        throw new GraphQLError('Unauthorized', {
+          extensions: { code: 'UNAUTHORIZED', expose: true },
+        });
+      }
+
+      try {
+        const res = await fetch(
+          `${NEXT_PUBLIC_BACKEND_API_URL}/api/friends/accept`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+              NEXT_POKEDEX_CONSUMER_ID:
+                process.env.NEXT_PUBLIC_CONSUMER_ID ?? '',
+            },
+            body: JSON.stringify({ targetUserId: args.targetUserId }),
+          }
+        );
+
+        const message = await res.text();
+
+        if (!res.ok) {
+          throw new GraphQLError(message || 'Could not accept', {
+            extensions: { code: 'BAD_REQUEST', expose: true },
+          });
+        }
+
+        return { message: message || 'Friend request accepted' };
+      } catch (err: any) {
+        console.error('Error:', err);
         throw new GraphQLError(err.message || 'Unexpected error', {
           extensions: { code: 'INTERNAL_SERVER_ERROR', expose: true },
         });

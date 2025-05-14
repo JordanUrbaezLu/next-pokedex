@@ -9,3 +9,5 @@ Filter Page
   Favorites Page
 
 AI PR Reviewer
+
+Send friend request through email or user ID
