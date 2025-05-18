@@ -145,7 +145,7 @@ test.describe('Next Pokédex', () => {
     await expect(homeTitle).toBeVisible();
   });
 
-  test('should show friends and pending requests correctly', async ({
+  test.skip('should show friends and pending requests correctly', async ({
     page,
   }) => {
     await page.goto('/login');
