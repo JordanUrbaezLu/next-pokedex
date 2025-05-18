@@ -173,6 +173,15 @@ const resolvers = {
           }
         );
 
+        if (res.status === 401) {
+          return new GraphQLError('Invalid or expired token', {
+            extensions: {
+              code: 'INVALID_OR_EXPIRED_TOKEN',
+              expose: true,
+            },
+          });
+        }
+
         const json = await res.json();
         return json;
       } catch (err) {

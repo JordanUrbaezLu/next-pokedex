@@ -37,7 +37,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading, refetch, error } = useQuery({
     queryKey: ['account'],
     queryFn: async () => {
       return await fetchData({
@@ -49,6 +49,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     staleTime: 1000 * 60 * 5,
     retry: false,
   });
+
+  const forceLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      window.location.assign('/');
+    } catch (error) {
+      console.error('Error with force logout:', error);
+    }
+  };
+
+  if (error) {
+    forceLogout();
+  }
 
   const user = data?.account
     ? {
