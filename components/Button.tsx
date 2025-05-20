@@ -7,7 +7,7 @@ import React from 'react';
 
 /**
  * @description
- * The Button used across the app for navigation
+ * The Button used across the app for navigation or action handling
  */
 
 const Button = ({
