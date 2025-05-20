@@ -87,7 +87,7 @@ export default function ChatSupportBox() {
   }, [findQ.isSuccess, findQ.data]);
 
   return (
-    <div className="w-90 m-3 ml-37">
+    <div className="w-90 m-3 ml-225 mt-7">
       {!open ? (
         <div className="flex">
           <button
