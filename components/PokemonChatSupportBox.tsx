@@ -92,7 +92,7 @@ export default function ChatSupportBox() {
         <div className="flex">
           <button
             onClick={() => setOpen(true)}
-            className="bg-gray-400 text-white px-7 py-2 rounded shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-300 hover:-translate-y-2 hover:shadow-lg active:scale-95 cursor-pointer"
+            className="bg-gray-400 text-white px-7 py-3 rounded shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-300 hover:-translate-y-2 hover:shadow-lg active:scale-95 cursor-pointer"
           >
             💬 Chat Support
           </button>
