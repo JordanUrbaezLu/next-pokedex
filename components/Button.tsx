@@ -23,9 +23,9 @@ const Button = ({
     <Link
       href={href}
       className="inline-block px-2 py-2 text-white bg-red-700 rounded-full 
-             shadow-md hover:shadow-lg active:shadow-sm 
-             hover:bg-red-800 active:bg-red-900 
-             active:scale-90 transition-all duration-100 text-sm"
+                 shadow-md hover:shadow-lg active:shadow-sm 
+                 hover:bg-red-800 active:bg-red-900 
+                 active:scale-90 transition-all duration-100 text-sm"
     >
       {name}
     </Link>
