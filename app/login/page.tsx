@@ -71,7 +71,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center -mt-24 -pt-2">
-      <div className="relative bg-gray-100/80 p-6 rounded-md shadow-md w-full max-w-md text-center">
+      <div className="relative bg-gray-100/80 p-6 rounded-md shadow-md w-full max-w-md text-center bg-gradient-to-b from-slate-300 to-gray-900">
         <img
           src="/pokeball.png"
           alt="Pokéball"

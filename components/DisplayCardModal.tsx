@@ -34,7 +34,7 @@ const DisplayCardModal = ({
       onClose={handleClose}
       disableScrollLock
     >
-      <div className="relative w-[360px] h-auto bg-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 shadow-lg">
+      <div className="relative w-[360px] h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 bg-gradient-to-b from-gray-600 to-slate-400">
         {/* Close Button */}
         <IconButton
           onClick={handleClose}
