@@ -33,17 +33,21 @@ const PokemonCard = ({
   return (
     <div className="ml-4 translate-x-2">
       <div
-        className="flex flex-col items-center justify-center 
-                 w-[120px] md:w-[200px] 
-                 max-h-[230px] md:max-h-[265px] 
-                 p-1 md:p-4 
-                 m-1 md:m-2 
-                 bg-gray-200
-                 cursor-pointer 
-                 hover:bg-gray-300 active:bg-gray-500 
-                 shadow-md hover:shadow-lg 
-                 transition-colors duration-200 ease-out 
-                 text-xs md:text-sm font-bold pokemon-font"
+        className="
+    flex flex-col items-center justify-center
+    w-[120px] md:w-[200px]
+    max-h-[230px] md:max-h-[265px]
+    p-1 md:p-4
+    m-1 md:m-2
+    bg-gradient-to-b from-gray-600 to-slate-400
+    hover:from-white hover:to-white hover:bg-gradient-to-b
+    active:from-gray-900 active:to-blue-200
+    cursor-pointer
+    shadow-md hover:shadow-lg
+    transition-colors duration-200 ease-out
+    text-xs md:text-sm font-bold
+    pokemon-font
+  "
         onClick={handleClick}
       >
         {loading && (
