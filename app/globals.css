@@ -15,8 +15,12 @@
 
 body {
   color: var(--foreground);
-  font-family: 'Poppins';
-  background-color: rgba(48, 47, 47, 0.658);
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(
+    to right,
+    #0f172a,
+    #334155
+  ); /* from-slate-900 to-slate-700 */
 }
 
 .title {

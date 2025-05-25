@@ -70,12 +70,12 @@ const LoginPage = () => {
   const disabled = loginMutation.isPending || loginMutation.isSuccess;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-300/40 backdrop-blur-sm mt-1">
-      <div className="relative bg-blue-300/40 p-6 rounded-md shadow-md w-full max-w-md text-center">
+    <div className="min-h-screen flex items-center justify-center -mt-24 -pt-2">
+      <div className="relative bg-gray-100/80 p-6 rounded-md shadow-md w-full max-w-md text-center bg-gradient-to-b from-slate-300 to-gray-900">
         <img
           src="/pokeball.png"
           alt="Pokéball"
-          className="w-10 h-10 mx-auto mb-4 border rounded-md ml-2 mt-1"
+          className="w-10 h-10 mx-auto ml-2 mt-4"
         />
         <img
           src="/pokemonlogo.png"

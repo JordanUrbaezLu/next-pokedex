@@ -7,7 +7,7 @@ import React from 'react';
 
 export default async function Home() {
   return (
-    <div className="p-6">
+    <div className="p-6 text-white">
       <div>Welcome to the Next Pokédex Home Page</div>
     </div>
   );
