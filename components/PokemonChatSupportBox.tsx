@@ -92,18 +92,18 @@ export default function ChatSupportBox() {
         <div className="flex">
           <button
             onClick={() => setOpen(true)}
-            className="bg-gray-400 text-white px-7 py-3 rounded shadow-md hover:bg-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-300 hover:-translate-y-2 hover:shadow-lg active:scale-95 cursor-pointer"
+            className="bg-gray-300 text-white px-7 py-3 rounded shadow-md hover:bg-gray-700 transition-all duration-300 ease-in-out hover:bg-blue-300 hover:-translate-y-2 hover:shadow-lg active:scale-95 cursor-pointer"
           >
             💬 Chat Support
           </button>
         </div>
       ) : (
-        <div className="bg-sky-200 border shadow-lg rounded-lg p-5">
+        <div className="bg-gray-400 text-white py-4 px-4 rounded-md">
           {/* Header */}
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Find My Pokémon</h2>
             <button
-              className="cursor-pointer rounded-full px-2 shadow-md hover:bg-red-300 hover:shadow-[0_0_10px_red] transition-shadow duration-100"
+              className="cursor-pointer rounded-full px-2 shadow-md bg-gray-300 hover:bg-red-300 hover:shadow-[0_0_10px_red] transition-shadow duration-200"
               onClick={() => setOpen(false)}
             >
               ✕
@@ -138,7 +138,7 @@ export default function ChatSupportBox() {
           <button
             onClick={handleSubmit}
             disabled={!!submittedQuestion}
-            className="mt-2 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-sky-700 disabled:opacity-50 cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg active:scale-95 cursor-pointer"
+            className="mt-2 w-full px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-500 disabled:opacity-50 cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg active:scale-95 cursor-pointer"
           >
             Ask
           </button>
