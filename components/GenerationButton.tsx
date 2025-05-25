@@ -13,7 +13,7 @@ const GenerationButton = ({ generation }: { generation: any }) => {
       <Link
         className="
         translate-x-95 p-2 mb-3 mt-4
-        rounded-full bg-gradient-to-b from-slate-500 to-zinc-400
+        rounded-lg bg-gradient-to-b from-slate-500 to-zinc-400
         hover:bg-gray-300 hover:from-gray-300 hover:to-gray-300 hover:bg-gradient-to-b
         active:bg-gray-100
         cursor-pointer shadow-md hover:shadow-lg
