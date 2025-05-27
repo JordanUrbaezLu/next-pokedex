@@ -5,6 +5,7 @@ export type PokemonData = {
   shinyImg?: string;
   type1?: string;
   type2?: string;
+  isFavorite?: boolean; // ⭐ Indicates if marked as favorite
   stats?: {
     hp?: number;
     attack?: number;

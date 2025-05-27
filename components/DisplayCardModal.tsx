@@ -2,6 +2,9 @@ import Modal from '@mui/material/Modal';
 import { PokemonData } from '@/types/PokemonData';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import React, { useState, useEffect } from 'react';
 
 /**
  * @description
@@ -18,6 +21,16 @@ const DisplayCardModal = ({
   displayedPokemon: PokemonData | null;
 }) => {
   const maxStat = 255;
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    setIsFavorite(displayedPokemon?.isFavorite || false);
+  }, [displayedPokemon]);
+
+  const toggleFavorite = () => {
+    setIsFavorite((prev) => !prev);
+  };
 
   const statBarColor = (value: number) => {
     if (value >= 150) return 'bg-red-900';
@@ -43,10 +56,22 @@ const DisplayCardModal = ({
           <CloseIcon />
         </IconButton>
 
-        <div className="text-xl font-bold mb-3 text-black text-center">
+        {/* Name + Favorite */}
+        <div className="text-xl font-bold mb-3 text-black text-center flex justify-center items-center gap-2">
           {displayedPokemon?.name}
+          <IconButton
+            onClick={toggleFavorite}
+            className="p-0 hover:scale-110 transition-transform duration-200"
+          >
+            {isFavorite ? (
+              <StarIcon className="text-yellow-500" />
+            ) : (
+              <StarBorderIcon className="text-yellow-500" />
+            )}
+          </IconButton>
         </div>
 
+        {/* Image */}
         {displayedPokemon?.img && (
           <div className="flex justify-center mb-4">
             <img
@@ -69,9 +94,9 @@ const DisplayCardModal = ({
                   <span>{key.replace(/([A-Z])/g, ' $1')}</span>
                   <span>{value}</span>
                 </div>
-                <div className="w-full bg-gray-500 rounded-half h-3">
+                <div className="w-full bg-gray-500 rounded-full h-3">
                   <div
-                    className={`h-3 rounded-half ${statBarColor(value)}`}
+                    className={`h-3 rounded-full ${statBarColor(value)}`}
                     style={{ width: `${fillPercent}%` }}
                   />
                 </div>
