@@ -22,14 +22,42 @@ const DisplayCardModal = ({
 }) => {
   const maxStat = 255;
 
+  const FAVORITES_KEY = 'favoritePokemon';
+
+  const getFavoritesFromStorage = (): string[] => {
+    if (typeof window === 'undefined') return [];
+    const stored = localStorage.getItem(FAVORITES_KEY);
+    return stored ? JSON.parse(stored) : [];
+  };
+
+  const saveFavoritesToStorage = (favorites: string[]) => {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  };
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    setIsFavorite(displayedPokemon?.isFavorite || false);
+    if (!displayedPokemon?.name) return;
+    const favorites = getFavoritesFromStorage();
+    setIsFavorite(favorites.includes(displayedPokemon.name));
   }, [displayedPokemon]);
 
   const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
+    const name = displayedPokemon?.name;
+    if (!name) return;
+
+    const favorites = getFavoritesFromStorage();
+    let updatedFavorites;
+
+    if (favorites.includes(name)) {
+      updatedFavorites = favorites.filter((fav) => fav !== name);
+      setIsFavorite(false);
+    } else {
+      updatedFavorites = [...favorites, name];
+      setIsFavorite(true);
+    }
+
+    saveFavoritesToStorage(updatedFavorites);
   };
 
   const statBarColor = (value: number) => {
