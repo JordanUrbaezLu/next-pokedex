@@ -69,6 +69,15 @@ const DisplayCardModal = ({
     return 'bg-red-500';
   };
 
+  // ✅ Highest stat logic added here
+  const stats = displayedPokemon?.stats || {};
+  const maxStatValue = Math.max(
+    ...(Object.values(stats) as number[])
+  );
+  const maxStatKeys = Object.entries(stats)
+    .filter(([, value]) => value === maxStatValue)
+    .map(([key]) => key);
+
   return (
     <Modal
       open={isDisplayCardOpen}
@@ -111,27 +120,33 @@ const DisplayCardModal = ({
         )}
 
         {/* Stat Bars */}
-        {Object.entries(displayedPokemon?.stats || {}).map(
-          ([key, value]) => {
-            const fillPercent =
-              typeof value === 'number' ? (value / maxStat) * 100 : 0;
+        {Object.entries(stats).map(([key, value]) => {
+          const fillPercent =
+            typeof value === 'number' ? (value / maxStat) * 100 : 0;
 
-            return (
-              <div key={key} className="mb-3 text-black">
-                <div className="flex justify-between text-m font-bold capitalize">
-                  <span>{key.replace(/([A-Z])/g, ' $1')}</span>
-                  <span>{value}</span>
-                </div>
-                <div className="w-full bg-gray-500 rounded-full h-3">
-                  <div
-                    className={`h-3 rounded-full ${statBarColor(value)}`}
-                    style={{ width: `${fillPercent}%` }}
-                  />
-                </div>
+          return (
+            <div key={key} className="mb-3 text-black">
+              <div className="flex justify-between text-m font-bold capitalize">
+                <span>{key.replace(/([A-Z])/g, ' $1')}</span>
+                <span
+                  className={
+                    maxStatKeys.includes(key)
+                      ? 'text-red-600 font-extrabold'
+                      : ''
+                  }
+                >
+                  {value}
+                </span>
               </div>
-            );
-          }
-        )}
+              <div className="w-full bg-gray-500 rounded-full h-3">
+                <div
+                  className={`h-3 rounded-full ${statBarColor(value)}`}
+                  style={{ width: `${fillPercent}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Modal>
   );
