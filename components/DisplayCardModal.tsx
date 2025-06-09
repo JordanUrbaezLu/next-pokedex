@@ -2,6 +2,9 @@ import Modal from '@mui/material/Modal';
 import { PokemonData } from '@/types/PokemonData';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import React, { useState, useEffect } from 'react';
 
 /**
  * @description
@@ -19,6 +22,44 @@ const DisplayCardModal = ({
 }) => {
   const maxStat = 255;
 
+  const FAVORITES_KEY = 'favoritePokemon';
+
+  const getFavoritesFromStorage = (): string[] => {
+    if (typeof window === 'undefined') return [];
+    const stored = localStorage.getItem(FAVORITES_KEY);
+    return stored ? JSON.parse(stored) : [];
+  };
+
+  const saveFavoritesToStorage = (favorites: string[]) => {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  };
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (!displayedPokemon?.name) return;
+    const favorites = getFavoritesFromStorage();
+    setIsFavorite(favorites.includes(displayedPokemon.name));
+  }, [displayedPokemon]);
+
+  const toggleFavorite = () => {
+    const name = displayedPokemon?.name;
+    if (!name) return;
+
+    const favorites = getFavoritesFromStorage();
+    let updatedFavorites;
+
+    if (favorites.includes(name)) {
+      updatedFavorites = favorites.filter((fav) => fav !== name);
+      setIsFavorite(false);
+    } else {
+      updatedFavorites = [...favorites, name];
+      setIsFavorite(true);
+    }
+
+    saveFavoritesToStorage(updatedFavorites);
+  };
+
   const statBarColor = (value: number) => {
     if (value >= 150) return 'bg-red-900';
     if (value >= 125) return 'bg-red-800';
@@ -27,6 +68,15 @@ const DisplayCardModal = ({
     if (value >= 50) return 'bg-red-200';
     return 'bg-red-500';
   };
+
+  // ✅ Highest stat logic added here
+  const stats = displayedPokemon?.stats || {};
+  const maxStatValue = Math.max(
+    ...(Object.values(stats) as number[])
+  );
+  const maxStatKeys = Object.entries(stats)
+    .filter(([, value]) => value === maxStatValue)
+    .map(([key]) => key);
 
   return (
     <Modal
@@ -43,10 +93,22 @@ const DisplayCardModal = ({
           <CloseIcon />
         </IconButton>
 
-        <div className="text-xl font-bold mb-3 text-black text-center">
+        {/* Name + Favorite */}
+        <div className="text-xl font-bold mb-3 text-black text-center flex justify-center items-center gap-2">
           {displayedPokemon?.name}
+          <IconButton
+            onClick={toggleFavorite}
+            className="p-0 hover:scale-110 transition-transform duration-200"
+          >
+            {isFavorite ? (
+              <StarIcon className="text-yellow-500" />
+            ) : (
+              <StarBorderIcon className="text-yellow-500" />
+            )}
+          </IconButton>
         </div>
 
+        {/* Image */}
         {displayedPokemon?.img && (
           <div className="flex justify-center mb-4">
             <img
@@ -58,27 +120,33 @@ const DisplayCardModal = ({
         )}
 
         {/* Stat Bars */}
-        {Object.entries(displayedPokemon?.stats || {}).map(
-          ([key, value]) => {
-            const fillPercent =
-              typeof value === 'number' ? (value / maxStat) * 100 : 0;
+        {Object.entries(stats).map(([key, value]) => {
+          const fillPercent =
+            typeof value === 'number' ? (value / maxStat) * 100 : 0;
 
-            return (
-              <div key={key} className="mb-3 text-black">
-                <div className="flex justify-between text-m font-bold capitalize">
-                  <span>{key.replace(/([A-Z])/g, ' $1')}</span>
-                  <span>{value}</span>
-                </div>
-                <div className="w-full bg-gray-500 rounded-half h-3">
-                  <div
-                    className={`h-3 rounded-half ${statBarColor(value)}`}
-                    style={{ width: `${fillPercent}%` }}
-                  />
-                </div>
+          return (
+            <div key={key} className="mb-3 text-black">
+              <div className="flex justify-between text-m font-bold capitalize">
+                <span>{key.replace(/([A-Z])/g, ' $1')}</span>
+                <span
+                  className={
+                    maxStatKeys.includes(key)
+                      ? 'text-red-600 font-extrabold'
+                      : ''
+                  }
+                >
+                  {value}
+                </span>
               </div>
-            );
-          }
-        )}
+              <div className="w-full bg-gray-500 rounded-full h-3">
+                <div
+                  className={`h-3 rounded-full ${statBarColor(value)}`}
+                  style={{ width: `${fillPercent}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Modal>
   );
